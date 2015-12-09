@@ -11,3 +11,8 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # USERS
 GET    /users                       controllers.UserController.users()
 POST   /user                        controllers.UserController.newUser()
+
+
+# CLUBS
+GET		/clubs						controllers.ClubController.clubs()
+POST	/club						controllers.ClubController.newClub()
