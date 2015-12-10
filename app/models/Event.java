@@ -11,4 +11,5 @@ public class Event extends Model
     public String id;
     public String eventname;
     public String date;
+	public String time;
 }

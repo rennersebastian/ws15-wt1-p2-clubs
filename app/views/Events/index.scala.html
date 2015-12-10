@@ -1,0 +1,34 @@
+@(clubs: List[Event])
+
+@main("Welcome to Play") {
+
+<div class="row">
+	<div class="col-md-4">
+		<h3>New Event</h3>
+    	<form class="form-inline" action="@routes.EventController.newEvent()" method="post">
+	        <div class="form-group">
+	        	<input placeholder="event description" type="text" class="form-control" name="eventname" \>
+				<input placeholder="date" type="text" class="form-control" name="date" \>
+				<input placeholder="time" type="text" class="form-control" name="time" \>
+	        </div>
+	        <div class="form-group">
+	        	<button type="submit" class="btn btn-default">Add Event</button>
+	        </div>
+	    </form>
+ 	</div>
+</div>  
+
+<div class="row">
+	<div class="col-md-12">
+		<h3>Events</h3>
+		<div class="list-group">
+			@for(event <- events) {
+				<a href="#" class="list-group-item">@event.date</a>
+				<a href="#" class="list-group-item">@event.time</a>
+				<a href="#" class="list-group-item">@event.eventname</a>
+			}
+		</div>
+	</div>
+</div>
+
+}
