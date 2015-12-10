@@ -9,7 +9,8 @@ import javax.persistence.Id;
 public class User extends Model{
     @Id
     public String id;
-    public String username;
+
+    public String userName;
     public String firstName;
     public String lastName;
 }

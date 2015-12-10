@@ -6,6 +6,7 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.*;
 
+import play.libs.ws.WS;
 import play.mvc.*;
 import play.test.*;
 import play.data.DynamicForm;
@@ -33,13 +34,13 @@ public class ApplicationTest {
         int a = 1 + 1;
         assertEquals(2, a);
     }
-    /**
+
     @Test
-    public void renderTemplate() {
-        Content html = views.html.index.render("Your new application is ready.");
-        assertEquals("text/html", contentType(html));
-        assertTrue(contentAsString(html).contains("Your new application is ready."));
+    public void testInServer() {
+        int timeout = 5000;
+        running(testServer(3333), () -> {
+            assertEquals(OK, WS.url("http://localhost:3333").get().get(timeout).getStatus());
+        });
     }
-    */
 
 }

@@ -19,7 +19,7 @@ create table event (
 
 create table user (
   id                        varchar(255) not null,
-  username                  varchar(255),
+  user_name                 varchar(255),
   first_name                varchar(255),
   last_name                 varchar(255),
   constraint pk_user primary key (id))
