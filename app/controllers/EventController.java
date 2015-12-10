@@ -16,11 +16,11 @@ public class EventController {
     public Result newEvent(){
         Event event = Form.form(Event.class).bindFromRequest().get();
         event.save();
-        return redirect(routes.Application.index());
+        return redirect(routes.EventController.events());
     }
 
     public Result events(){
         List<Event> events = new Model.Finder<String, Event>(Event.class).all();
-        return ok(toJson(events));
+        return ok(views.html.Events.index.render(events));
     }
 }

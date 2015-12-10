@@ -13,6 +13,7 @@ create table event (
   id                        varchar(255) not null,
   eventname                 varchar(255),
   date                      varchar(255),
+  time                      varchar(255),
   constraint pk_event primary key (id))
 ;
 

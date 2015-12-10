@@ -1,4 +1,4 @@
-@(clubs: List[Event])
+@(events: List[Event])
 
 @main("Welcome to Play") {
 
@@ -23,8 +23,6 @@
 		<h3>Events</h3>
 		<div class="list-group">
 			@for(event <- events) {
-				<a href="#" class="list-group-item">@event.date</a>
-				<a href="#" class="list-group-item">@event.time</a>
 				<a href="#" class="list-group-item">@event.eventname</a>
 			}
 		</div>
