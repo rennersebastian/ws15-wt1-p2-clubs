@@ -16,11 +16,11 @@ public class UserController {
     public Result newUser(){
         User user = Form.form(User.class).bindFromRequest().get();
         user.save();
-        return redirect(routes.Application.index());
+        return redirect(routes.UserController.users());
     }
 
     public Result users(){
         List<User> users = new Model.Finder<String, User>(User.class).all();
-        return ok(toJson(users));
+        return ok(views.html.Users.index.render(users));
     }
 }
