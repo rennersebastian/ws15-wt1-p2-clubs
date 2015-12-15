@@ -12,13 +12,9 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET    /users                       controllers.UserController.users()
 POST   /user                        controllers.UserController.newUser()
 
-# CLUBS
-GET		/clubs						controllers.ClubController.clubs()
-POST	/club						controllers.ClubController.newClub()
-
 # TEAMS
 GET		/teams						controllers.TeamController.teams()
-POST	/teams						controllers.TeamController.newTeam()
+POST	/team						controllers.TeamController.newTeam()
 DELETE	/teams						controllers.TeamController.delete(id: Long)
 GET		/teams/:id					controllers.TeamController.show(id: Long)
 POST	/teams/:id					controllers.TeamController.update(id: Long)
