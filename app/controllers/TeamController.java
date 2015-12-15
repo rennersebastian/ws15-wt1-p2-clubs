@@ -1,6 +1,6 @@
 package controllers;
 
-import com.avaje.ebean.Model;
+import com.avaje.ebean.*;
 import models.*;
 import play.data.*;
 import play.*;
@@ -8,8 +8,7 @@ import play.mvc.*;
 import views.html.*;
 import java.util.*;
 import static play.libs.Json.toJson;
-import static play.mvc.Results.ok;
-import static play.mvc.Results.redirect;
+import static play.mvc.Results.*;
 
 public class TeamController {
 
@@ -31,11 +30,20 @@ public class TeamController {
 	
 	public Result update(Long id) {
 		Form<Team> myForm = Form.form(Team.class).bindFromRequest();
-		Team dbTeam = Team.find.byId(id);
 		Team team = myForm.get();
-		dbTeam.setName(myForm.apply("name").value());
-		dbTeam.save();
-		return redirect(routes.TeamController.show(id));
+		Team dbTeam = Team.find.byId(team.id);
+		String n = team.name;
+		System.out.println(n);
+		dbTeam.setName(n);
+		dbTeam.update();
+		/*Team dbTeam = Team.find.byId(1L);
+		
+		Form<Team> myForm = Form.form(Team.class).bindFromRequest();
+		myForm.get().update(String.parse(dbTeam.id));
+		
+		//dbTeam.setName(myForm.apply("name").value());
+		//dbTeam.save();*/
+		return redirect(routes.TeamController.show(1L));
 	}
 	
 	public Result delete(Long id) {

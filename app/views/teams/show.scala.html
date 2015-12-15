@@ -5,6 +5,7 @@
 		<div class="col-md-12">
 			<form class="form-inline" action="@{val id = team.id; routes.TeamController.update(id)}" method="post">
 				<div class="form-group">
+					<input text="number" name="id" value="@team.id">
 					<input placeholder="team name" type="text" class="form-control as-label" name="name" value="@team.name" \><i class="glyphicon glyphicon-pencil as-label"></i>
 				</div>
 				<div class="form-group">
