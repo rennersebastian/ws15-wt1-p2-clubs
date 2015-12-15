@@ -17,6 +17,13 @@ create table event (
   constraint pk_event primary key (id))
 ;
 
+create table team (
+  id                        bigint not null,
+  name                      varchar(255),
+  founded                   timestamp,
+  constraint pk_team primary key (id))
+;
+
 create table user (
   id                        varchar(255) not null,
   user_name                 varchar(255),
@@ -28,6 +35,8 @@ create table user (
 create sequence club_seq;
 
 create sequence event_seq;
+
+create sequence team_seq;
 
 create sequence user_seq;
 
@@ -42,6 +51,8 @@ drop table if exists club;
 
 drop table if exists event;
 
+drop table if exists team;
+
 drop table if exists user;
 
 SET REFERENTIAL_INTEGRITY TRUE;
@@ -49,6 +60,8 @@ SET REFERENTIAL_INTEGRITY TRUE;
 drop sequence if exists club_seq;
 
 drop sequence if exists event_seq;
+
+drop sequence if exists team_seq;
 
 drop sequence if exists user_seq;
 

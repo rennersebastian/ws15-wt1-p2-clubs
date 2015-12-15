@@ -1,3 +1,23 @@
 body {
 	background-color: #d9edf7;
 }
+
+input.as-label {
+	border: 2px dashed;
+	background-color: #d9edf7;
+	height: 50px;
+	margin-top: 20px;
+    margin-bottom: 10px;
+	margin-right: 10px;
+	font-size: 24px;
+	font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+i.as-label {
+	font-size: 24px;
+	top: 10px;
+	margin: 10px;
+}

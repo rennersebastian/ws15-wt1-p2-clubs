@@ -16,6 +16,15 @@ POST   /user                        controllers.UserController.newUser()
 GET		/clubs						controllers.ClubController.clubs()
 POST	/club						controllers.ClubController.newClub()
 
+# TEAMS
+GET		/teams						controllers.TeamController.teams()
+POST	/teams						controllers.TeamController.newTeam()
+DELETE	/teams						controllers.TeamController.delete(id: Long)
+GET		/teams/:id					controllers.TeamController.show(id: Long)
+POST	/teams/:id					controllers.TeamController.update(id: Long)
+DELETE	/teams/:id					controllers.TeamController.delete(id: Long)
+
+
 # EVENTS
 GET		/events						controllers.EventController.events()
 POST	/event						controllers.EventController.newEvent()

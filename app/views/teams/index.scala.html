@@ -1,0 +1,45 @@
+@(teams: List[Team])
+
+@main("Teams") {
+	<div class="row">
+		<div class="col-md-12">
+			<h3>New Team</h3>
+				<form class="form-inline" action="@routes.TeamController.newTeam()" method="post">
+					<div class="form-group">
+						<input placeholder="team name" type="text" class="form-control" name="name" \>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Add Team</button>
+					</div>
+				</form>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Teams</h3>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Members</th>
+							<th>Founded</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+					@for(team <- teams) {
+						<tr>
+							<td><a href="@routes.TeamController.show(team.id)">@team.name</a></td>
+							<td>3</td>
+							<td>@team.founded</td>
+							<td><a href="@routes.TeamController.delete(team.id)"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
+						</tr>
+					}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+}
