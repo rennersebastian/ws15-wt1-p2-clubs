@@ -23,4 +23,8 @@ public class UserController {
         List<User> users = new Model.Finder<String, User>(User.class).all();
         return ok(views.html.Users.index.render(users));
     }
+
+    public Result user(){
+        return ok(views.html.Users.newUser.render());
+    }
 }

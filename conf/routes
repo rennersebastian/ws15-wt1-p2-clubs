@@ -10,6 +10,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # USERS
 GET    /users                       controllers.UserController.users()
+GET    /user                        controllers.UserController.user()
 POST   /user                        controllers.UserController.newUser()
 
 # TEAMS
@@ -24,3 +25,6 @@ DELETE	/teams/:id					controllers.TeamController.delete(id: Long)
 # EVENTS
 GET		/events						controllers.EventController.events()
 POST	/event						controllers.EventController.newEvent()
+
+# LOGIN
+GET     /login                      controllers.LoginController.index()
