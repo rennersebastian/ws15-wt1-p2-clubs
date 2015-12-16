@@ -27,4 +27,15 @@ public class UserController {
     public Result user(){
         return ok(views.html.Users.newUser.render());
     }
+
+    public Result show(Long id){
+        User user = User.find.byId(id);
+        return ok(views.html.Users.show.render(user));
+    }
+
+    public Result delete(Long id) {
+        User user = User.find.byId(id);
+        user.delete();
+        return redirect(routes.UserController.users());
+    }
 }

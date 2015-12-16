@@ -19,7 +19,7 @@ create table team (
 ;
 
 create table user (
-  id                        varchar(255) not null,
+  id                        bigint not null,
   user_name                 varchar(255),
   first_name                varchar(255),
   last_name                 varchar(255),
