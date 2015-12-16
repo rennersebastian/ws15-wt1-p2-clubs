@@ -38,4 +38,21 @@ public class UserController {
         user.delete();
         return redirect(routes.UserController.users());
     }
+    public Result update(Long id) {
+        Form<User> myForm = Form.form(User.class).bindFromRequest();
+        User user = myForm.get();
+        User dbUser = User.find.byId(user.id);
+        String n = user.userName;
+        System.out.println(n);
+        //dbTeam.setName(n);
+        dbUser.update();
+		/*Team dbTeam = Team.find.byId(1L);
+
+		Form<Team> myForm = Form.form(Team.class).bindFromRequest();
+		myForm.get().update(String.parse(dbTeam.id));
+
+		//dbTeam.setName(myForm.apply("name").value());
+		//dbTeam.save();*/
+        return redirect(routes.UserController.show(user.id));
+    }
 }

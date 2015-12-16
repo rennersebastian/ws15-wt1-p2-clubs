@@ -1,5 +1,20 @@
 @(user: User)
 
 @main(user.userName) {
-
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-inline" action="@{val id = user.id; routes.UserController.update(id)}" method="post">
+                <div class="form-group">
+                    <input type="hidden" text="hidden" name="id" value="@user.id">
+                    <input placeholder="team name" type="text" class="form-control as-label" name="name" value="@user.userName" \><i class="glyphicon glyphicon-pencil as-label"></i>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <a href="@routes.UserController.delete(user.id)"><i class="glyphicon glyphicon-remove"></i> Delete Account</a>
+    </div>
 }
