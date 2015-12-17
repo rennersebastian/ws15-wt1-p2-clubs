@@ -23,4 +23,13 @@ public class EventController {
         List<Event> events = new Model.Finder<String, Event>(Event.class).all();
         return ok(views.html.Events.index.render(events));
     }
+	
+	public Result update(Long id){
+		return redirect(routes.EventController.events());
+	}
+	
+	public Result show(Long id) {
+		Event event = Event.find.byId(id);
+		return ok(views.html.Events.show.render(event));
+	}
 }
