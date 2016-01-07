@@ -28,6 +28,8 @@ DELETE	/teams/:id					controllers.TeamController.delete(id: Long)
 # EVENTS
 GET		/events						controllers.EventController.events()
 POST	/event						controllers.EventController.newEvent()
+GET     /events/:id                 controllers.EventController.show(id: Long)
+POST    /events/:id                 controllers.EventController.update(id: Long)
 
 # LOGIN
 GET     /login                      controllers.LoginController.index()
