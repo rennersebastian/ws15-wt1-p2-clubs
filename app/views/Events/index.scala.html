@@ -19,6 +19,7 @@
  	</div>
 </div>  
 
+<<<<<<< d0f67c1d837ac75440da75a923c13f5dbdc824ec
 <div class="row">
 	<div class="col-md-12">
 		<h3>Events</h3>
@@ -30,8 +31,109 @@
 				<button type="button" class="btn btn-default">Remove</button>
 	        </div>		
 			}
+=======
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Events</h3>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Event</th>
+							<th>Invites</th>
+							<th><font color="green">Accepts</font></th>
+							<th><font color="orange">Maybe</font></th>
+							<th><font color="red">Declines</font></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+					@for(event <- events) {
+						<tr>
+							<td>@event.date</td>
+							<td>@event.time</td>
+							<td><a href="#">@event.eventname</a></td>
+							<td>20</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
+							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
+						</tr>
+					}
+						<tr>
+							<td>Dienstag 22.12.2015</td>
+							<td>19:00</td>
+							<td><a href="#">Weihnachtsfeier</a></td>
+							<td>20</td>
+							<td>15</td>
+							<td>1</td>
+							<td>3</td>
+							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
+							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
+						</tr>
+						<tr>
+							<td>Samstag 2.1.2016</td>
+							<td>15:00</td>
+							<td><a href="#">Treffen der Kassenwärte</a></td>
+							<td>5</td>
+							<td>4</td>
+							<td>1</td>
+							<td>0</td>
+							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
+							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
+						</tr>
+						<tr>
+							<td>Mittwoch 13.1.2016</td>
+							<td>18:30</td>
+							<td><a href="#">Training (Immenweg)</a></td>
+							<td>15</td>
+							<td>9</td>
+							<td>2</td>
+							<td>4</td>
+							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
+							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
+						</tr>
+						<tr>
+							<td>Mittwoch 20.1.2016</td>
+							<td>19:15</td>
+							<td><a href="#">Training (Halle)</a></td>
+							<td>15</td>
+							<td>5</td>
+							<td>2</td>
+							<td>1</td>
+							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
+							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
+						</tr>
+						<tr>
+							<td>Mittwoch 27.1.2016</td>
+							<td>18:30</td>
+							<td><a href="#">Training (Immenweg)</a></td>
+							<td>15</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0</td>
+							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
+							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
+						</tr>
+						<tr>
+							<td>Sonntag 31.1.2016</td>
+							<td>8:00</td>
+							<td><a href="#">Hallenturnier bei Berolina Stralau</a></td>
+							<td>15</td>
+							<td>4</td>
+							<td>2</td>
+							<td>2</td>
+							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
+							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+>>>>>>> added Click-Dummies for Event(s)
 		</div>
 	</div>
-</div>
 
 }
