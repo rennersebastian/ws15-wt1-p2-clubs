@@ -10,15 +10,15 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # USERS
 GET    /users                       controllers.UserController.users()
+GET    /user                        controllers.UserController.user()
+GET    /users/:id                   controllers.UserController.show(id: Long)
 POST   /user                        controllers.UserController.newUser()
-
-# CLUBS
-GET		/clubs						controllers.ClubController.clubs()
-POST	/club						controllers.ClubController.newClub()
+DELETE /users/:id                   controllers.UserController.delete(id: Long)
+POST   /users/:id                   controllers.UserController.update(id: Long)
 
 # TEAMS
 GET		/teams						controllers.TeamController.teams()
-POST	/teams						controllers.TeamController.newTeam()
+POST	/team						controllers.TeamController.newTeam()
 DELETE	/teams						controllers.TeamController.delete(id: Long)
 GET		/teams/:id					controllers.TeamController.show(id: Long)
 POST	/teams/:id					controllers.TeamController.update(id: Long)
@@ -28,3 +28,6 @@ DELETE	/teams/:id					controllers.TeamController.delete(id: Long)
 # EVENTS
 GET		/events						controllers.EventController.events()
 POST	/event						controllers.EventController.newEvent()
+
+# LOGIN
+GET     /login                      controllers.LoginController.index()

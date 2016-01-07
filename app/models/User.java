@@ -8,9 +8,11 @@ import javax.persistence.Id;
 @Entity
 public class User extends Model{
     @Id
-    public String id;
+    public Long id;
 
     public String userName;
     public String firstName;
     public String lastName;
+
+    public static Finder<Long, User> find = new Finder<Long,User>(User.class);
 }
