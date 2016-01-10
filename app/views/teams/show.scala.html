@@ -1,4 +1,4 @@
-@(team: Team)
+@(team: Team, users: List[User])
 
 @main(team.name) {
 	<div class="row">
@@ -18,20 +18,23 @@
 	
 	<div class="row">
 		<div class="col-md-5">
-			<h3>Members</h3>
+			<h3>Members (@team.members.size)</h3>
 			
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
-						<form class="form-inline">
+						<form class="form-inline" action="@{val id = team.id; routes.TeamController.addMember(id)}" method="post">
 							<div class="input-group">
 								<select class="form-control">
+								@for(user <- users) {
+									<option value="1">@user.lastName, @user.firstName</option>
+								}
 									<option>Silie, Peter</option>
 									<option>Ahner, Mario</option>
 									<option>Zufall, Rainer</option>
 								</select>
 								<span class="input-group-btn">
-									<button class="btn btn-success">Add Member</button>
+									<button type="submit" class="btn btn-success">Add Member</button>
 								</span>
 							</div>
 						</form>
@@ -51,6 +54,13 @@
 								</tr>
 							</thead>
 							<tbody>
+								@for(member <- team.members) {
+									<tr>
+										<td>@member.lastName</td>
+										<td>@member.firstName</td>
+										<td><i class="glyphicon glyphicon-remove"></td>
+									</tr>
+								}
 								<tr>
 									<td>Himmel</td>
 									<td>Klara</td>
@@ -74,17 +84,17 @@
 		</div>
 		
 		<div class="col-md-7">
-			<h3>Events</h3>
+			<h3>Events (@team.events.size)</h3>
 			
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
-						<form class="form-inline">
-							<input type="date" min="2000-01-01" max="9999-12-31" class="form-control">
+						<form class="form-inline" action="@{val id = team.id; routes.TeamController.newEvent(id)}" method="post">
+							<input type="datetime-local" min="2000-01-01" max="9999-12-31" name="date" class="form-control">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Description"></input>
+								<input type="text" name="eventname" class="form-control" placeholder="Description"></input>
 								<span class="input-group-btn">
-									<button class="btn btn-success">Add Event</button>
+									<button type="submit" class="btn btn-success">Add Event</button>
 								</span>
 							</div>
 						</form>
@@ -108,6 +118,12 @@
 								</tr>
 							</thead>
 							<tbody>
+								@for(event <- team.events) {
+									<tr>
+										<td>@event.date</td>
+										<td>@event.eventname</td>
+									</tr>
+								}
 								<tr>
 									<td>15.12.2015 19:00 Uhr</td>
 									<td>Training</td>

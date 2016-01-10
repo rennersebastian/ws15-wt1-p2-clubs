@@ -33,7 +33,7 @@
 						<tr>
 							<td><a href="@routes.TeamController.show(team.id)">@team.name</a></td>
 							<td>3</td>
-							<td>@team.founded</td>
+							<td>@team.events.size</td>
 							<td><a href="@routes.TeamController.delete(team.id)"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
 						</tr>
 					}

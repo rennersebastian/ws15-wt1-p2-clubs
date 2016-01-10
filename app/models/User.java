@@ -1,11 +1,14 @@
 package models;
 
 import com.avaje.ebean.Model;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.util.*;
+import play.data.format.*;
+import play.data.validation.*;
 
 @Entity
+@Table(name="or_user")
 public class User extends Model{
     @Id
     public Long id;
@@ -15,4 +18,10 @@ public class User extends Model{
     public String lastName;
 
     public static Finder<Long, User> find = new Finder<Long,User>(User.class);
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	public List<Team> teams;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	public List<Invite> invites;
 }

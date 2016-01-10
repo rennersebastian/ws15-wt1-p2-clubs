@@ -1,17 +1,26 @@
 package models;
 
 import com.avaje.ebean.Model;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+import java.util.*;
+import play.data.format.*;
+import play.data.validation.*;
 
 @Entity
+@Table(name="or_event")
 public class Event extends Model
 {
     @Id
     public Long id;
     public String eventname;
-    public String date;
-	public String time;
+    public Date date;
 	
 	public static Finder<Long, Event> find = new Finder<Long, Event>(Event.class);
+	
+	@ManyToOne
+	public Team team;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	public List<Invite> invites;
 }
