@@ -7,7 +7,7 @@ import play.*;
 import play.mvc.*;
 import views.html.*;
 import java.util.*;
-import static play.libs.Json.toJson;
+import static play.libs.Json.*;
 import static play.mvc.Results.*;
 
 public class TeamController {
@@ -25,7 +25,8 @@ public class TeamController {
 	
 	public Result show(Long id) {
 		Team team = Team.find.byId(id);
-		return ok(views.html.teams.show.render(team));
+		List<User> users = User.find.all();
+		return ok(views.html.teams.show.render(team, users));
 	}
 	
 	public Result update(Long id) {
@@ -44,6 +45,40 @@ public class TeamController {
 		//dbTeam.setName(myForm.apply("name").value());
 		//dbTeam.save();*/
 		return redirect(routes.TeamController.show(1L));
+	}
+	
+	public Result addMember(Long id) {
+		Team team = Team.find.byId(id);
+		User user = Form.form(User.class).bindFromRequest().get();
+		team.members.add(user);
+		return redirect(routes.TeamController.show(id));
+	}
+	
+	public Result members(Long id){
+		Team team = Team.find.byId(id);
+		List<User> memberList = team.members;
+        return ok(views.html.teams.members.render(memberList));
+    }
+	
+	public Result newEvent(Long id) {
+		Event event = Form.form(Event.class).bindFromRequest().get();
+		Team team = Team.find.byId(id);
+		event.team = team;
+        event.save();
+		return redirect(routes.TeamController.events(id));
+	}
+	
+	public Result events(Long id){
+		Team team = Team.find.byId(id);
+		List<Event> eventList = team.events;
+        return ok(views.html.teams.events.render(eventList));
+    }
+	
+	public Result invites(Long id, Long eventId) {
+		Team team = Team.find.byId(id);
+		Event event = Event.find.byId(eventId);
+		List<Invite> inviteList = event.invites;
+		return ok(views.html.teams.invites.render(inviteList));
 	}
 	
 	public Result delete(Long id) {

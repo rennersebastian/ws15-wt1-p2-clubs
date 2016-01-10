@@ -8,20 +8,20 @@ import play.data.format.*;
 import play.data.validation.*;
 
 @Entity
-@Table(name="or_team")
-public class Team extends Model{
+@Table(name="or_invite")
+public class Invite extends Model{
     @Id
     public Long id;
     
 	@Constraints.Required
-    public String name;
+    public Integer accept;
 	
 	@Formats.DateTime(pattern="dd.MM.yyyy")
-    public Date founded = new Date();
+    public Date invited = new Date();
 	
-	public static Finder<Long, Team> find = new Finder<Long,Team>(Team.class);
+	public static Finder<Long, Invite> find = new Finder<Long,Invite>(Invite.class);
 	
-	@OneToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	public List<Event> events;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
