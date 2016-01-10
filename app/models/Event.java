@@ -21,6 +21,6 @@ public class Event extends Model
 	@ManyToOne
 	public Team team;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@OneToMany
 	public List<Invite> invites;
 }

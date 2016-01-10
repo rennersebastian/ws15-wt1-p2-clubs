@@ -21,9 +21,9 @@ public class Invite extends Model{
 	
 	public static Finder<Long, Invite> find = new Finder<Long,Invite>(Invite.class);
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	public List<Event> events;
+	@ManyToOne
+	public Event event;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	public List<User> members;
+	@ManyToOne
+	public User member;
 }

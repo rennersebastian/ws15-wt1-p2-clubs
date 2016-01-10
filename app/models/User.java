@@ -22,6 +22,6 @@ public class User extends Model{
 	@ManyToMany(cascade=CascadeType.ALL)
 	public List<Team> teams;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@OneToMany
 	public List<Invite> invites;
 }
