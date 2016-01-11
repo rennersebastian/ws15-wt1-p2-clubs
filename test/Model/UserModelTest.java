@@ -37,6 +37,7 @@ public class UserModelTest {
             public void run() {
                 User user = new User();
                 user.userName = "Test User Name";
+                user.setPassword("pw");
                 user.firstName = "Test First Name";
                 user.lastName = "Test Last Name";
                 user.save();
