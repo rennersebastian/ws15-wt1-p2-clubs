@@ -39,3 +39,6 @@ POST    /events/:id                 controllers.EventController.update(id: Long)
 
 # LOGIN
 GET     /login                      controllers.LoginController.index()
+POST    /login                      controllers.LoginController.loginUser()
+GET     /logout                     controllers.LoginController.logout()
+GET     /currentUser                controllers.LoginController.getCurrentUser()

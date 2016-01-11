@@ -30,6 +30,7 @@ create table or_team (
 create table or_user (
   id                        bigint not null,
   user_name                 varchar(255),
+  sha_password              varbinary(255),
   first_name                varchar(255),
   last_name                 varchar(255),
   constraint pk_or_user primary key (id))

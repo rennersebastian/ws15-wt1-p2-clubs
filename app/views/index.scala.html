@@ -1,7 +1,9 @@
 @(message: String)
 
 @main("Welcome to Play") {
-
+    @if(flash.containsKey("success")) {
+        @flash.get("success")
+    }
     <form action="@routes.UserController.newUser()" method="post">
         <input type="text" name="username" \>
         <input type="text" name="firstName" \>
