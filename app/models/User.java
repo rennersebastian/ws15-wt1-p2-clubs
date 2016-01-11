@@ -57,6 +57,14 @@ public class User extends Model{
         }
     }
 
+    public static User findByUsernameAndPassword(String username, String password) {
+        return find
+                .where()
+                .eq("user_name", username)
+                .eq("sha_password", getSha512(password))
+                .findUnique();
+    }
+
     public static User findByUsername(String username) {
         return find
                 .where()
