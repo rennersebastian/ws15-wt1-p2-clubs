@@ -62,6 +62,10 @@ public class LoginController {
         }
     }
 
+    public Result getCurrentUser(){
+        return ok(session().get("username"));
+    }
+
     public static class UserForm {
         @Constraints.Required
         public String username;
