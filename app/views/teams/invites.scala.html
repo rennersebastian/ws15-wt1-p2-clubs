@@ -1,0 +1,11 @@
+@(invites: List[Invite])
+
+@main("Teams") {
+	@for(invite <- invites) {
+		<p>@invite.id</p>
+		<p>@invite.accept</p>
+		<p>@invite.invited</p>
+		<p>@invite.member.lastName</p>
+		<p>@invite.event.eventname</p>
+	}
+}

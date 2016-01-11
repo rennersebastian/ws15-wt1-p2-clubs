@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import javax.persistence.*;
 import play.data.validation.Constraints;
 
 import javax.persistence.Entity;
@@ -8,8 +9,12 @@ import javax.persistence.Id;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.*;
+import play.data.format.*;
+import play.data.validation.*;
 
 @Entity
+@Table(name="or_user")
 public class User extends Model{
     @Id
     public Long id;
@@ -71,4 +76,10 @@ public class User extends Model{
                 .eq("user_name", username)
                 .findUnique();
     }
+
+	@ManyToMany(cascade=CascadeType.ALL)
+	public List<Team> teams;
+
+	@OneToMany
+	public List<Invite> invites;
 }

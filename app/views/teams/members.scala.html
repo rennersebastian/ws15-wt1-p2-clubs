@@ -1,0 +1,11 @@
+@(members: List[User])
+
+@main("Teams") {
+	@for(member <- members) {
+		<p>@member.userName</p>
+		<p>@member.id</p>
+		<p>@member.firstName</p>
+		<p>@member.lastName</p>
+		<p>@member.teams.size</p>
+	}
+}

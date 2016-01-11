@@ -1,0 +1,10 @@
+@(events: List[Event])
+
+@main("Teams") {
+	@for(event <- events) {
+		<p>@event.eventname</p>
+		<p>@event.id</p>
+		<p>@event.date</p>
+		<p>@event.team.name</p>
+	}
+}

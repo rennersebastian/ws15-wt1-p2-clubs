@@ -1,12 +1,14 @@
 package models;
 
-import com.avaje.ebean.Model;
 import java.util.*;
 import javax.persistence.*;
+
+import com.avaje.ebean.Model;
 import play.data.format.*;
 import play.data.validation.*;
 
 @Entity
+@Table(name="or_team")
 public class Team extends Model{
     @Id
     public Long id;
@@ -18,4 +20,10 @@ public class Team extends Model{
     public Date founded = new Date();
 	
 	public static Finder<Long, Team> find = new Finder<Long,Team>(Team.class);
+	
+	@OneToMany
+	public List<Event> events;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	public List<User> members;
 }
