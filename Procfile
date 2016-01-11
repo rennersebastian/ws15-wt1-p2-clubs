@@ -1,0 +1,1 @@
+web: target/universal/stage/bin/ws15-wt1-p2-clubs -Dhttp.port=${PORT}
