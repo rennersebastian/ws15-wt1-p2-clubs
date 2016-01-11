@@ -12,6 +12,7 @@ import play.mvc.Http.Session;
 import views.html.*;
 import java.util.List;
 
+import static play.mvc.Http.Context.Implicit.flash;
 import static play.mvc.Http.Context.Implicit.session;
 import static play.mvc.Results.badRequest;
 import static play.mvc.Results.ok;
@@ -23,12 +24,14 @@ public class UserController {
         Form<SignUp> signUpForm = Form.form(SignUp.class).bindFromRequest();
 
         if ( signUpForm.hasErrors()) {
-            return badRequest(signUpForm.errorsAsJson());
+            flash().put("error", "Inputs are not correct");
+            return redirect(routes.UserController.user());
         }
         SignUp newUser =  signUpForm.get();
         User existingUser = User.findByUsername(newUser.username);
         if(existingUser != null) {
-            return badRequest(buildJsonResponse("error", "User exists"));
+            flash().put("error", "Username already exists.");
+            return redirect(routes.UserController.user());
         } else {
             User user = new User();
             user.setUsername(newUser.username);
@@ -69,9 +72,7 @@ public class UserController {
         return ok(views.html.Users.index.render(users));
     }
 
-    public Result user(){
-        return ok(views.html.Users.newUser.render());
-    }
+    public Result user(){ return ok(views.html.Users.newUser.render()); }
 
     public Result show(Long id){
         User user = User.find.byId(id);

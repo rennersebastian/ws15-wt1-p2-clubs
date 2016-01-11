@@ -2,6 +2,9 @@
     <div class="row">
         <div class="col-md-4">
             <h3>Reigstration</h3>
+            @if(flash.containsKey("error")) {
+                @flash.get("error")
+            }
             <form class="form-inline" action="@routes.UserController.newUser()" method="post">
                 <div class="form-group">
                     <input placeholder="user name" type="text" class="form-control" name="username" \>
