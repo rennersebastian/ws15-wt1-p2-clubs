@@ -21,6 +21,7 @@ create table team (
 create table user (
   id                        bigint not null,
   user_name                 varchar(255),
+  sha_password              varbinary(255),
   first_name                varchar(255),
   last_name                 varchar(255),
   constraint pk_user primary key (id))

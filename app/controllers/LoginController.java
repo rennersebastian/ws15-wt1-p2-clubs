@@ -15,4 +15,6 @@ public class LoginController {
     public Result index(){
         return ok(views.html.Users.login.render());
     }
+
+
 }
