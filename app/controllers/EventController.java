@@ -1,7 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Model;
-import models.Event;
+import models.*;
 import play.data.Form;
 import play.*;
 import play.mvc.*;
@@ -21,7 +21,8 @@ public class EventController {
 
     public Result events(){
         List<Event> events = new Model.Finder<String, Event>(Event.class).all();
-        return ok(views.html.Events.index.render(events));
+		List<Team> teams = new Model.Finder<String, Team>(Team.class).all();
+        return ok(views.html.Events.index.render(events, teams));
     }
 	
 	public Result update(Long id){
@@ -31,5 +32,11 @@ public class EventController {
 	public Result show(Long id) {
 		Event event = Event.find.byId(id);
 		return ok(views.html.Events.show.render(event));
+	}
+	
+	public Result delete(Long id) {
+		Event event = Event.find.byId(id);
+		event.delete();
+		return redirect(routes.EventController.events());
 	}
 }

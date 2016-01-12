@@ -1,38 +1,45 @@
-@(events: List[Event])
+@(events: List[Event], teams: List[Team])
 
 @main("Events") {
 
 <div class="row">
-	<div class="col-md-4">
-		<h3>New Event</h3>
-    	<form class="form-inline" action="@routes.EventController.newEvent()" method="post">
-	        <div class="form-group">
-	        	<input placeholder="event description" type="text" class="form-control" name="eventname" \>
-				<input placeholder="date" type="text" class="form-control" name="date" \>
-				<input placeholder="time" type="text" class="form-control" name="time" \>
-	        </div>
-	        <div class="form-group">
-	        	<button type="submit" class="btn btn-default">Add Event</button>
-				<button type="reset" class="btn btn-default">Clear</button>
-	        </div>
-	    </form>
- 	</div>
-</div>  
+			<div class="col-md-12">
+				<h3>Create New Event</h3>
+					<div class="form-group">
+						<form class="form-inline" action="@routes.EventController.newEvent()" method="post">
+							<input type="datetime-local" min="2000-01-01" max="9999-12-31" class="form-control">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Event Description"></input>
+								<select class="form-control">
+								<option>(All teams)</option>
+								@for(team <- teams) {
+									<option value="1">@team.name</option>
+								}
+								</select>
+								<span class="input-group-btn">
+									<button class="btn btn-success">Create</button>
+									<button type="reset" class="btn btn-default">Clear</button>
+								</span>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 
 	<div class="row">
 		<div class="col-md-12">
-			<h3>Events</h3>
+			<h3>All Events</h3>
 			<div class="table-responsive">
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>Date</th>
-							<th>Time</th>
 							<th>Event</th>
 							<th>Invites</th>
-							<th><font color="green">Accepts</font></th>
-							<th><font color="orange">Maybe</font></th>
-							<th><font color="red">Declines</font></th>
+							<th title="Accept"><i class="glyphicon glyphicon-ok-sign" style="color:green"></th>
+							<th title="Decline"><i class="glyphicon glyphicon-remove-sign" style="color:red"></th>
+							<th title="Maybe"><i class="glyphicon glyphicon-question-sign" style="color:orange"></th>
+							<th title="Unanswered"><i class="glyphicon glyphicon-info-sign" style="color:blue"></th>
 							<th></th>
 						</tr>
 					</thead>
@@ -40,82 +47,15 @@
 					@for(event <- events) {
 						<tr>
 							<td>@event.date</td>
-							<td></td>
-							<td><a href="#">@event.eventname</a></td>
-							<td>20</td>
+							<td><a href="@routes.EventController.show(event.id)">@event.eventname</a></td>
 							<td>0</td>
 							<td>0</td>
 							<td>0</td>
-							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
-							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
+							<td>0</td>
+							<td>0</td>
+							<td><a href="@routes.EventController.delete(event.id)"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
 						</tr>
 					}
-						<tr>
-							<td>Dienstag 22.12.2015</td>
-							<td>19:00</td>
-							<td><a href="#">Weihnachtsfeier</a></td>
-							<td>20</td>
-							<td>15</td>
-							<td>1</td>
-							<td>3</td>
-							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
-							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
-						</tr>
-						<tr>
-							<td>Samstag 2.1.2016</td>
-							<td>15:00</td>
-							<td><a href="#">Treffen der Kassenwärte</a></td>
-							<td>5</td>
-							<td>4</td>
-							<td>1</td>
-							<td>0</td>
-							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
-							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
-						</tr>
-						<tr>
-							<td>Mittwoch 13.1.2016</td>
-							<td>18:30</td>
-							<td><a href="#">Training (Immenweg)</a></td>
-							<td>15</td>
-							<td>9</td>
-							<td>2</td>
-							<td>4</td>
-							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
-							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
-						</tr>
-						<tr>
-							<td>Mittwoch 20.1.2016</td>
-							<td>19:15</td>
-							<td><a href="#">Training (Halle)</a></td>
-							<td>15</td>
-							<td>5</td>
-							<td>2</td>
-							<td>1</td>
-							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
-							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
-						</tr>
-						<tr>
-							<td>Mittwoch 27.1.2016</td>
-							<td>18:30</td>
-							<td><a href="#">Training (Immenweg)</a></td>
-							<td>15</td>
-							<td>1</td>
-							<td>0</td>
-							<td>0</td>
-							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
-							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
-						</tr>
-						<tr>
-							<td>Sonntag 31.1.2016</td>
-							<td>8:00</td>
-							<td><a href="#">Hallenturnier bei Berolina Stralau</a></td>
-							<td>15</td>
-							<td>4</td>
-							<td>2</td>
-							<td>2</td>
-							<td><a href="#"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
-							<td><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
