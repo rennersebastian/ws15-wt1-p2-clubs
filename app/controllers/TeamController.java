@@ -35,7 +35,7 @@ public class TeamController {
 		Team dbTeam = Team.find.byId(team.id);
 		String n = team.name;
 		System.out.println(n);
-		//dbTeam.setName(n);
+		dbTeam.setName(n);
 		dbTeam.update();
 		/*Team dbTeam = Team.find.byId(1L);
 		

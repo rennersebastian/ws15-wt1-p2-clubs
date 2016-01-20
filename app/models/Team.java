@@ -26,4 +26,12 @@ public class Team extends Model{
 	
 	@ManyToMany(cascade=CascadeType.ALL)
 	public List<User> members;
+	
+	public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
