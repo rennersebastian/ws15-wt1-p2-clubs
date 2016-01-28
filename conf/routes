@@ -29,10 +29,9 @@ GET		/teams/:id/members			controllers.TeamController.members(id: Long)
 POST	/teams/:id/members			controllers.TeamController.addMember(id: Long)
 GET		/teams/:id/events/:eventId/invites	controllers.TeamController.invites(id: Long, eventId: Long)
 
-
-
 # EVENTS
 GET		/events						controllers.EventController.events()
+DELETE	/events						controllers.EventController.delete(id: Long)
 POST	/event						controllers.EventController.newEvent()
 GET     /events/:id                 controllers.EventController.show(id: Long)
 POST    /events/:id                 controllers.EventController.update(id: Long)
