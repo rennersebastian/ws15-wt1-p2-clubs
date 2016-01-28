@@ -29,7 +29,7 @@ import static org.junit.Assert.*;
  *
  */
 public class TeamModelTest {
-    @Test
+    /**@Test
     public void save() {
         running(fakeApplication(), new Runnable() {
             public void run() {
@@ -50,5 +50,5 @@ public class TeamModelTest {
 				assertTrue("Team contains Event test", team.events.size > 0);
             }
         });
-    }
+    }*/
 }
