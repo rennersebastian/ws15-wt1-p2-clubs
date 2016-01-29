@@ -5,11 +5,14 @@ import models.*;
 import play.data.*;
 import play.*;
 import play.mvc.*;
+import play.mvc.Security.Authenticated;
 import views.html.*;
 import java.util.*;
 import static play.libs.Json.*;
 import static play.mvc.Results.*;
 
+
+@Authenticated(Secured.class)
 public class TeamController {
 
     public Result newTeam(){

@@ -5,12 +5,14 @@ import models.*;
 import play.data.Form;
 import play.*;
 import play.mvc.*;
+import play.mvc.Security.Authenticated;
 import views.html.*;
 import java.util.List;
 import static play.libs.Json.toJson;
 import static play.mvc.Results.ok;
 import static play.mvc.Results.redirect;
 
+@Authenticated(Secured.class)
 public class EventController {
 
     public Result newEvent(){

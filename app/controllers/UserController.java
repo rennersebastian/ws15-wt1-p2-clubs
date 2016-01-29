@@ -9,6 +9,7 @@ import play.data.validation.Constraints;
 import play.libs.Json;
 import play.mvc.*;
 import play.mvc.Http.Session;
+import play.mvc.Security.Authenticated;
 import views.html.*;
 import java.util.List;
 
@@ -67,6 +68,8 @@ public class UserController {
         return wrapper;
     }
 
+
+    @Authenticated(Secured.class)
     public Result users(){
         List<User> users = new Model.Finder<String, User>(User.class).all();
         return ok(views.html.Users.index.render(users));
@@ -74,16 +77,23 @@ public class UserController {
 
     public Result user(){ return ok(views.html.Users.newUser.render()); }
 
+
+    @Authenticated(Secured.class)
     public Result show(Long id){
         User user = User.find.byId(id);
         return ok(views.html.Users.show.render(user));
     }
 
+
+    @Authenticated(Secured.class)
     public Result delete(Long id) {
         User user = User.find.byId(id);
         user.delete();
         return redirect(routes.UserController.users());
     }
+
+
+    @Authenticated(Secured.class)
     public Result update(Long id) {
         Form<User> myForm = Form.form(User.class).bindFromRequest();
         User user = myForm.get();
