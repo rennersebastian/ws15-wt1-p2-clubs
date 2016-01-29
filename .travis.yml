@@ -9,3 +9,6 @@ deploy:
   provider: heroku
   api_key:
     secure: WyQE8utIKgXY/Ith/X0scygrj2z9e/g2CO/HnJeAG8u62AGnt3yAZnNWdthVxr1b9iyvuL8EYtAmicf/0WFl5Pk7nyG6uw8TbRdhY3rXKi1wIkTxiT4YcGiAj6WV8oDGYSLyFTcJCG85Lw+IIdFcdiiB+E/2b2AXKxx7yApW0Z5SBPdrdfbbcAASfbSSBKLiA23Yav1sIom2Us/HdX+13wQOuK6pUNDBwShictVvqP8/TOazz3VMg/okO642/8n66GW5K/aLSh8UEX97DRpW1s+63+LqOKE/xPS0xo+5LKXdPCnxSJND40vuctcu0sfu9FtOUwq+58x+l6GWCObzAQtjU/OWGx0ue5KeIaTAj5fClKjJzWYuA0NBw9lmwcpxkYx86v5VnyjVUP+FjZGpHZR31CgU9UBFNyX475avhLs768ADx2oXWfJd+GVxKEBz1ojK5TMGNdIkhNoTV2d23EWKTuSuc1KdzafWm/aGm2WpMH7/JhQXefOOiSafLRSXdtNJaCW0HMgcW6jLFcdEK4wP6jUKk3dvQ46ZM+eMwLvemNc5hANQ2lj88yRABvPml8n+J+ZHbCbsGAljXjZuTv2lsiOM80t5ZHATtCymDdPAJ2UsdDPyrTUWQyFNUz0K4ymlOGdBrOfpHCV7iTW5oQA8VP19EbWJ22+PCWKMMNY=
+  app: pacific-crag-7109
+  on:
+    repo: rennersebastian/ws15-wt1-p2-clubs
