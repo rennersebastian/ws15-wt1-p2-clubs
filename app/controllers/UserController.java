@@ -77,6 +77,11 @@ public class UserController {
 
     public Result user(){ return ok(views.html.Users.newUser.render()); }
 
+    @Authenticated(Secured.class)
+    public Result showByName(String username){
+        User user = User.findByUsername(username);
+        return ok(views.html.Users.show.render(user));
+    }
 
     @Authenticated(Secured.class)
     public Result show(Long id){
