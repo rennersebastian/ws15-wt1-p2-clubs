@@ -41,6 +41,10 @@ public class User extends Model{
     public String getUserName(){
         return this.userName;
     }
+    public String getFirstName() { return this.firstName; }
+    public String getLastName() { return this.lastName; }
+
+    public byte[] getShaPassword() { return this.shaPassword; }
 
     public void setPassword(String password) {
         this.shaPassword = getSha512(password);
@@ -49,6 +53,7 @@ public class User extends Model{
     public void setLastName(String lastname) {
         this.lastName = lastname;
     }
+    public void setShaPassword(byte[] shaPassword) { this.shaPassword = shaPassword; }
 
     public static byte[] getSha512(String value) {
         try {
