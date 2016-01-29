@@ -45,7 +45,9 @@
 					</ul>
 				}else{
 					<ul class="nav navbar-nav nav-right">
+						<li></li>
 						<li>Hello, @{session.get("username")}</li>
+						<li><a href="@routes.UserController.showByName(session.get("username"))">Profile</a></li>
 						<li><a href="@routes.LoginController.logout()">Logout</a></li>
 					</ul>
 				}

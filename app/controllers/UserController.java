@@ -77,6 +77,11 @@ public class UserController {
 
     public Result user(){ return ok(views.html.Users.newUser.render()); }
 
+    @Authenticated(Secured.class)
+    public Result showByName(String username){
+        User user = User.findByUsername(username);
+        return ok(views.html.Users.show.render(user));
+    }
 
     @Authenticated(Secured.class)
     public Result show(Long id){
@@ -98,17 +103,12 @@ public class UserController {
         Form<User> myForm = Form.form(User.class).bindFromRequest();
         User user = myForm.get();
         User dbUser = User.find.byId(user.id);
-        String n = user.userName;
-        System.out.println(n);
-        //dbTeam.setName(n);
-        dbUser.update();
-		/*Team dbTeam = Team.find.byId(1L);
 
-		Form<Team> myForm = Form.form(Team.class).bindFromRequest();
-		myForm.get().update(String.parse(dbTeam.id));
+        dbUser.setFirstName(user.getFirstName());
+        dbUser.setLastName(user.getLastName());
+        dbUser.setShaPassword(user.getShaPassword());
+        dbUser.save();
 
-		//dbTeam.setName(myForm.apply("name").value());
-		//dbTeam.save();*/
         return redirect(routes.UserController.show(user.id));
     }
 }
