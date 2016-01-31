@@ -3,9 +3,9 @@
 @main("Teams") {
 	@for(invite <- invites) {
 		<p>@invite.id</p>
-		<p>@invite.accept</p>
-		<p>@invite.invited</p>
-		<p>@invite.member.lastName</p>
-		<p>@invite.event.eventname</p>
+		<p>@invite.getAccept()</p>
+		<p>@invite.getInvited()</p>
+		<p>@invite.member.getLastName()</p>
+		<p>@invite.event.getEventName()</p>
 	}
 }

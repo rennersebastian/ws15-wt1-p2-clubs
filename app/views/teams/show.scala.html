@@ -1,6 +1,6 @@
 @(team: Team, users: List[User])
 
-@main(team.name) {
+@main(team.getName()) {
 	<div class="row">
 		<div class="col-md-12">
 			<form class="form-inline" action="@{val id = team.id; routes.TeamController.update(id)}" method="post">
@@ -27,7 +27,7 @@
 							<div class="input-group">
 								<select class="form-control">
 								@for(user <- users) {
-									<option value="1">@user.lastName, @user.firstName</option>
+									<option value="1">@user.getLastName(), @user.getFirstName()</option>
 								}
 									<option>Silie, Peter</option>
 									<option>Ahner, Mario</option>
@@ -56,8 +56,8 @@
 							<tbody>
 								@for(member <- team.members) {
 									<tr>
-										<td>@member.lastName</td>
-										<td>@member.firstName</td>
+										<td>@member.getLastName()</td>
+										<td>@member.getFirstName()</td>
 										<td><i class="glyphicon glyphicon-remove"></td>
 									</tr>
 								}
@@ -92,7 +92,7 @@
 						<form class="form-inline" action="@{val id = team.id; routes.TeamController.newEvent(id)}" method="post">
 							<input type="datetime-local" min="2000-01-01" max="9999-12-31" name="date" class="form-control">
 							<div class="input-group">
-								<input type="text" name="eventname" class="form-control" placeholder="Description"></input>
+								<input type="text" name="eventName" class="form-control" placeholder="Description"></input>
 								<span class="input-group-btn">
 									<button type="submit" class="btn btn-success">Add Event</button>
 								</span>
@@ -120,8 +120,8 @@
 							<tbody>
 								@for(event <- team.events) {
 									<tr>
-										<td>@event.date</td>
-										<td>@event.eventname</td>
+										<td>@event.getDate()</td>
+										<td>@event.getEventName()</td>
 									</tr>
 								}
 								<tr>

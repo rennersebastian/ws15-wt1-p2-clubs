@@ -29,6 +29,7 @@ public class TeamController {
 	public Result show(Long id) {
 		Team team = Team.find.byId(id);
 		List<User> users = User.find.all();
+		//List<Event> events = Team.find.select("*").fetch("events");
 		return ok(views.html.teams.show.render(team, users));
 	}
 	
@@ -36,7 +37,7 @@ public class TeamController {
 		Form<Team> myForm = Form.form(Team.class).bindFromRequest();
 		Team team = myForm.get();
 		Team dbTeam = Team.find.byId(team.id);
-		String n = team.name;
+		String n = team.getName();
 		System.out.println(n);
 		dbTeam.setName(n);
 		dbTeam.update();

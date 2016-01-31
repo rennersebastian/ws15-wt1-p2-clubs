@@ -13,7 +13,7 @@
 								<select class="form-control">
 								<option>(All teams)</option>
 								@for(team <- teams) {
-									<option value="1">@team.name</option>
+									<option value="1">@team.getName()</option>
 								}
 								</select>
 								<span class="input-group-btn">
@@ -46,8 +46,8 @@
 					<tbody>
 					@for(event <- events) {
 						<tr>
-							<td>@event.date</td>
-							<td><a href="@routes.EventController.show(event.id)">@event.eventname</a></td>
+							<td>@event.getDate()</td>
+							<td><a href="@routes.EventController.show(event.id)">@event.getEventName()</a></td>
 							<td>0</td>
 							<td>0</td>
 							<td>0</td>

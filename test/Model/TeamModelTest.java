@@ -34,9 +34,10 @@ public class TeamModelTest {
         running(fakeApplication(), new Runnable() {
             public void run() {
                 Team team = new Team();
-                team.name = "Test Team Name";
-                team.founded = new Date();				
-                team.save();
+				team.name = "Test Team Name";
+				team.founded = new Date();	
+				team.events = new ArrayList<Event>();
+				team.save();
 				
 				Event event = new Event();
 				event.eventname = "Test Event Name";
@@ -44,10 +45,14 @@ public class TeamModelTest {
 				event.team = team;
 				event.save();
 				
-                assertTrue("Team id test", team.id != null);
+				List<Event> teamevents = team.events; //Team.find.select("*").fetch("events").findList();
+				
+				assertTrue("teamevents == 1", teamevents.size() == 1);
+				
+				assertTrue("Team id test", team.id != null);
 				assertTrue("Event id test", event.id != null);
-				assertTrue("Event contains Team test", event.team != null);
-				assertTrue("Team contains Event test", team.events.size > 0);
+				assertNotNull(event.team);
+				assertNotNull(team.events);
             }
         });
     }*/

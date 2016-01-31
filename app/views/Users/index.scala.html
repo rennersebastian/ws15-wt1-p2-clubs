@@ -17,8 +17,8 @@
                         @for(user <- users) {
                             <tr>
                                 <td><a href="@routes.UserController.show(user.id)">@user.getUserName()</a></td>
-                                <td>@user.firstName</td>
-                                <td>@user.lastName</td>
+                                <td>@user.getFirstName()</td>
+                                <td>@user.getLastName()</td>
                             </tr>
                         }
                         <tr>

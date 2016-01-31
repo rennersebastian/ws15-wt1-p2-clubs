@@ -9,8 +9,9 @@ import play.data.validation.*;
 
 @Entity
 @Table(name="or_team")
-public class Team extends Model{
+public class Team extends Model {
     @Id
+	@Column(name="team_id")
     public Long id;
     
 	@Constraints.Required
@@ -21,17 +22,20 @@ public class Team extends Model{
 	
 	public static Finder<Long, Team> find = new Finder<Long,Team>(Team.class);
 	
-	@OneToMany
-	public List<Event> events;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "team")
+	public List<Event> events = new ArrayList<Event>();
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-	public List<User> members;
+	public List<User> members = new ArrayList<User>();
 	
-	public String getName() {
-        return name;
-    }
+	public String getName() { return this.name; }
+	public Date getFounded() { return this.founded; }
 
     public void setName(String name) {
         this.name = name;
     }
+	
+	public void setFounded(Date founded) {
+		this.founded = founded;
+	}
 }
