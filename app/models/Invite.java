@@ -10,7 +10,20 @@ import play.data.validation.*;
 @Entity
 @Table(name="or_invite")
 public class Invite extends Model{
+
+	public static enum AcceptType {
+		ACCEPT,
+		DECLINE,
+		UNCERTAIN,
+		UNANSWERED
+	}
+	
+	public Invite() {
+		invited = new Date();
+	}
+
     @Id
+	@Column(name = "invite_id")
     public Long id;
     
 	@Constraints.Required
@@ -21,9 +34,20 @@ public class Invite extends Model{
 	
 	public static Finder<Long, Invite> find = new Finder<Long,Invite>(Invite.class);
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Event event;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public User member;
+	
+	public Integer getAccept() { return this.accept; }
+	public Date getInvited() { return this.invited; }
+	
+	public void setAccept(AcceptType type) {
+		this.accept = type.ordinal();
+	}
+	
+	public void setInvited(Date invited) {
+		this.invited = invited;
+	}
 }
