@@ -23,4 +23,14 @@ public class Event extends Model
 	
 	@OneToMany
 	public List<Invite> invites;
+	
+	public void setName(String eventname)
+	{
+		this.eventname = eventname;
+	}
+	
+	public void setDate(Date date)
+	{
+		this.date = date;
+	}
 }

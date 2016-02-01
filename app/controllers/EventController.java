@@ -27,7 +27,23 @@ public class EventController {
         return ok(views.html.Events.index.render(events, teams));
     }
 	
-	public Result update(Long id){
+	public Result updateName(Long id){
+		Form<Event> myForm = Form.form(Event.class).bindFromRequest();
+		Event event = myForm.get();
+		Event dbEvent = Event.find.byId(event.id);
+		String n = event.eventname;
+		dbEvent.setName(n);
+		dbEvent.update();
+		return redirect(routes.EventController.events());
+	}
+	
+	public Result updateDate(Long id){
+		Form<Event> myForm = Form.form(Event.class).bindFromRequest();
+		Event event = myForm.get();
+		Event dbEvent = Event.find.byId(event.id);
+		Date d = event.date;
+		dbEvent.setDate(d);
+		dbEvent.update();
 		return redirect(routes.EventController.events());
 	}
 	

@@ -3,7 +3,7 @@
 @main(event.eventname) {
 	<div class="row">
 		<div class="col-md-12">
-			<form class="form-inline" action="@{val id = event.id; routes.EventController.update(id)}" method="post">
+			<form class="form-inline" action="@{val id = event.id; routes.EventController.updateName(id)}" method="post">
 				<div class="form-group">
 					<input text="number" name="id" value="@event.id">
 					<input placeholder="eventname" type="text" class="form-control as-label" name="name" value="@event.eventname" \><i class="glyphicon glyphicon-pencil as-label"></i>

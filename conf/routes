@@ -35,7 +35,8 @@ GET		/events						controllers.EventController.events()
 DELETE	/events						controllers.EventController.delete(id: Long)
 POST	/event						controllers.EventController.newEvent()
 GET     /events/:id                 controllers.EventController.show(id: Long)
-POST    /events/:id                 controllers.EventController.update(id: Long)
+POST    /events/:id                 controllers.EventController.updateName(id: Long)
+POST    /events/:id                 controllers.EventController.updateDate(id: Long)
 
 # LOGIN
 GET     /login                      controllers.LoginController.index()
