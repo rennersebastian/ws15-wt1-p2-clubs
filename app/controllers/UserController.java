@@ -25,7 +25,7 @@ public class UserController {
         Form<SignUp> signUpForm = Form.form(SignUp.class).bindFromRequest();
 
         if ( signUpForm.hasErrors()) {
-            flash().put("error", "Inputs are not correct");
+            flash().put("error", "Inputs are not valid");
             return redirect(routes.UserController.user());
         }
         SignUp newUser =  signUpForm.get();
@@ -107,8 +107,10 @@ public class UserController {
 
         dbUser.setFirstName(user.getFirstName());
         dbUser.setLastName(user.getLastName());
-        dbUser.setShaPassword(user.getShaPassword());
+        if(user.getShaPassword() != null)
+            dbUser.setShaPassword(user.getShaPassword());
         dbUser.save();
+        flash().put("success", "Profile updated.");
 
         return redirect(routes.UserController.show(user.id));
     }
