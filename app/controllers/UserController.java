@@ -25,7 +25,7 @@ public class UserController {
         Form<SignUp> signUpForm = Form.form(SignUp.class).bindFromRequest();
 
         if ( signUpForm.hasErrors()) {
-            flash().put("error", "Inputs are not correct");
+            flash().put("error", "Inputs are not valid");
             return redirect(routes.UserController.user());
         }
         SignUp newUser =  signUpForm.get();
