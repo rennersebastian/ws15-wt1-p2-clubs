@@ -29,15 +29,15 @@ public class LoginController {
             return redirect(routes.LoginController.index());
         }
         Login loggingInUser = loginForm.get();
-        User user = User.findByUsernameAndPassword(loggingInUser.username, loggingInUser.password);
+        User user = User.findByUsernameAndPassword(loggingInUser.username.toLowerCase(), loggingInUser.password);
         if(user == null) {
             flash().put("error", "Password or username is not correct");
             return redirect(routes.LoginController.index());
         } else {
             session().clear();
-            session().put("username", loggingInUser.username);
+            session().put("username", loggingInUser.username.toLowerCase());
 
-            flash().put("success", "Welcome " + loggingInUser.username);
+            flash().put("success", "Welcome " + loggingInUser.username.toLowerCase());
             return redirect(routes.Application.index());
         }
     }

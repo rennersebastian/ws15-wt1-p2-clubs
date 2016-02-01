@@ -35,13 +35,13 @@ public class UserController {
             return redirect(routes.UserController.user());
         } else {
             User user = new User();
-            user.setUsername(newUser.username);
+            user.setUsername(newUser.username.toLowerCase());
             user.setPassword(newUser.password);
             user.setFirstName(newUser.firstName);
             user.setLastName(newUser.lastName);
             user.save();
             session().clear();
-            session().put("username", newUser.username);
+            session().put("username", user.getUserName());
 
             return redirect(routes.UserController.users());
         }

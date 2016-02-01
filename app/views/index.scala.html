@@ -1,14 +1,7 @@
 @(message: String)
 
-@main("Welcome to Play") {
+@main("Clubs") {
     @if(flash.containsKey("success")) {
         @flash.get("success")
     }
-    <form action="@routes.UserController.newUser()" method="post">
-        <input type="text" name="username" \>
-        <input type="text" name="firstName" \>
-        <input type="text" name="lastName" \>
-        <button>Add Person</button>
-    </form>
-    
 }
