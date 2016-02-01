@@ -4,6 +4,9 @@
     <div class="row">
         <div class="col-md-12">
             <h2>Update profile</h2>
+            @if(flash.containsKey("success")) {
+                @flash.get("success")
+            }
             <form class="form-inline" action="@{val id = user.id; routes.UserController.update(id)}" method="post">
                 <div class="row">
                     <div class="form-group">
@@ -47,6 +50,7 @@
             </form>
         </div>
     </div>
+    <h2>Delete profile</h2>
     <div class="row">
         <div class="col-md-6">
             <button type="button" class="btn btn-danger top-margin" data-toggle="modal" data-target="#myModal">Delete Account</button>

@@ -107,8 +107,10 @@ public class UserController {
 
         dbUser.setFirstName(user.getFirstName());
         dbUser.setLastName(user.getLastName());
-        dbUser.setShaPassword(user.getShaPassword());
+        if(user.getShaPassword() != null)
+            dbUser.setShaPassword(user.getShaPassword());
         dbUser.save();
+        flash().put("success", "Profile updated.");
 
         return redirect(routes.UserController.show(user.id));
     }
