@@ -5,7 +5,7 @@
 		<div class="col-md-12">
 			<form class="form-inline" action="@{val id = team.id; routes.TeamController.update(id)}" method="post">
 				<div class="form-group">
-					<input text="number" name="id" value="@team.id">
+					<input type="hidden" text="number" name="id" value="@team.id">
 					<input placeholder="team name" type="text" class="form-control as-label" name="name" value="@team.name" \><i class="glyphicon glyphicon-pencil as-label"></i>
 				</div>
 				<div class="form-group">
@@ -25,13 +25,11 @@
 					<div class="form-group">
 						<form class="form-inline" action="@{val id = team.id; routes.TeamController.addMember(id)}" method="post">
 							<div class="input-group">
-								<select class="form-control">
+								<select name="userSelect" class="form-control">
 								@for(user <- users) {
-									<option value="1">@user.getLastName(), @user.getFirstName()</option>
+									<option name="id" value="@user.id">@user.getLastName(), @user.getFirstName()</option>
 								}
 									<option>Silie, Peter</option>
-									<option>Ahner, Mario</option>
-									<option>Zufall, Rainer</option>
 								</select>
 								<span class="input-group-btn">
 									<button type="submit" class="btn btn-success">Add Member</button>
@@ -89,7 +87,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
-						<form class="form-inline" action="@{val id = team.id; routes.TeamController.newEvent(id)}" method="post">
+						<form class="form-inline" action="@{val id = team.id; routes.EventController.newEvent(id)}" method="post">
 							<input type="datetime-local" min="2000-01-01" max="9999-12-31" name="date" class="form-control">
 							<div class="input-group">
 								<input type="text" name="eventName" class="form-control" placeholder="Description"></input>
@@ -120,7 +118,7 @@
 							<tbody>
 								@for(event <- team.events) {
 									<tr>
-										<td>@event.getDate()</td>
+										<td><a href="@routes.EventController.show(team.id, event.id)">@event.getDate()</a></td>
 										<td>@event.getEventName()</td>
 									</tr>
 								}

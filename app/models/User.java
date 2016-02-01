@@ -27,9 +27,11 @@ public class User extends Model{
     @Constraints.Required
     public byte[] shaPassword;
 
+	@Constraints.Required
 	@Column(name = "first_name")
     public String firstName;
 	
+	@Constraints.Required
 	@Column(name = "last_name")
     public String lastName;
 

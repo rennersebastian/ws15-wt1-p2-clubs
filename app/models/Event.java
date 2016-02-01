@@ -32,7 +32,7 @@ public class Event extends Model {
 	public String getEventName() { return this.eventName; }
 	public Date getDate() { return this.date; }
 	
-	public void setEventname(String name) {
+	public void setEventName(String name) {
 		this.eventName = name;
 	}
 

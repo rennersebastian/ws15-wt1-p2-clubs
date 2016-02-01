@@ -6,22 +6,7 @@
 			<div class="col-md-12">
 				<h3>Create New Event</h3>
 					<div class="form-group">
-						<form class="form-inline" action="@routes.EventController.newEvent()" method="post">
-							<input type="datetime-local" min="2000-01-01" max="9999-12-31" name="date" class="form-control">
-							<div class="input-group">
-								<input type="text" name="eventname" class="form-control" placeholder="Event Description"></input>
-								<select class="form-control">
-								<option>(All teams)</option>
-								@for(team <- teams) {
-									<option value="1">@team.getName()</option>
-								}
-								</select>
-								<span class="input-group-btn">
-									<button class="btn btn-success">Create</button>
-									<button type="reset" class="btn btn-default">Clear</button>
-								</span>
-							</div>
-						</form>
+						
 					</div>
 				</div>
 			</div>
@@ -47,13 +32,13 @@
 					@for(event <- events) {
 						<tr>
 							<td>@event.getDate()</td>
-							<td><a href="@routes.EventController.show(event.id)">@event.getEventName()</a></td>
+							<td><a href="@routes.EventController.show(1, event.id)">@event.getEventName()</a></td>
 							<td>0</td>
 							<td>0</td>
 							<td>0</td>
 							<td>0</td>
 							<td>0</td>
-							<td><a href="@routes.EventController.delete(event.id)"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
+							<td><a href="@routes.EventController.delete(1, event.id)"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
 						</tr>
 					}
 					</tbody>

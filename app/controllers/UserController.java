@@ -51,7 +51,9 @@ public class UserController {
         @Constraints.Required
         public String username;
 
+		@Constraints.Required
         public String firstName;
+		@Constraints.Required
         public String lastName;
     }
 
