@@ -27,11 +27,13 @@
 		
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      <ul class="nav navbar-nav">
-		        <li><a href="@routes.TeamController.teams()">Teams</a></li>
-		        <li><a href="@routes.UserController.users()">Users</a></li>
-				<li><a href="@routes.EventController.events()">Events</a></li>
-		      </ul>
+			@if(session.get("username") != null) {
+				<ul class="nav navbar-nav">
+					<li><a href="@routes.TeamController.teams()">Teams</a></li>
+					<li><a href="@routes.UserController.users()">Users</a></li>
+					<li><a href="@routes.EventController.events()">Events</a></li>
+				</ul>
+			}
 		      <form class="navbar-form navbar-left" role="search">
 		        <div class="form-group">
 		          <input type="text" class="form-control" placeholder="Search">
@@ -46,7 +48,7 @@
 				}else{
 					<ul class="nav navbar-nav nav-right">
 						<li></li>
-						<li>Hello, @{session.get("username")}</li>
+						<li class="hello-user">Hello @{session.get("username")}!</li>
 						<li><a href="@routes.UserController.showByName(session.get("username"))">Profile</a></li>
 						<li><a href="@routes.LoginController.logout()">Logout</a></li>
 					</ul>
@@ -58,7 +60,7 @@
     	<div class="container">
         @content
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </body>
 </html>

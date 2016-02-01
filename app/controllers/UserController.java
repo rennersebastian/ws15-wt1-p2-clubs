@@ -25,7 +25,7 @@ public class UserController {
         Form<SignUp> signUpForm = Form.form(SignUp.class).bindFromRequest();
 
         if ( signUpForm.hasErrors()) {
-            flash().put("error", "Inputs are not correct");
+            flash().put("error", "Inputs are not valid");
             return redirect(routes.UserController.user());
         }
         SignUp newUser =  signUpForm.get();
@@ -35,13 +35,13 @@ public class UserController {
             return redirect(routes.UserController.user());
         } else {
             User user = new User();
-            user.setUsername(newUser.username);
+            user.setUsername(newUser.username.toLowerCase());
             user.setPassword(newUser.password);
             user.setFirstName(newUser.firstName);
             user.setLastName(newUser.lastName);
             user.save();
             session().clear();
-            session().put("username", newUser.username);
+            session().put("username", user.getUserName());
 
             return redirect(routes.UserController.users());
         }
@@ -93,8 +93,9 @@ public class UserController {
     @Authenticated(Secured.class)
     public Result delete(Long id) {
         User user = User.find.byId(id);
+        session().clear();
         user.delete();
-        return redirect(routes.UserController.users());
+        return redirect(routes.Application.index());
     }
 
 
@@ -106,8 +107,10 @@ public class UserController {
 
         dbUser.setFirstName(user.getFirstName());
         dbUser.setLastName(user.getLastName());
-        dbUser.setShaPassword(user.getShaPassword());
+        if(user.getShaPassword() != null)
+            dbUser.setShaPassword(user.getShaPassword());
         dbUser.save();
+        flash().put("success", "Profile updated.");
 
         return redirect(routes.UserController.show(user.id));
     }

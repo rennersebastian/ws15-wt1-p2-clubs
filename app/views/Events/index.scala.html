@@ -7,9 +7,9 @@
 				<h3>Create New Event</h3>
 					<div class="form-group">
 						<form class="form-inline" action="@routes.EventController.newEvent()" method="post">
-							<input type="datetime-local" min="2000-01-01" max="9999-12-31" class="form-control">
+							<input type="datetime-local" min="2000-01-01" max="9999-12-31" name="date" class="form-control">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Event Description"></input>
+								<input type="text" name="eventname" class="form-control" placeholder="Event Description"></input>
 								<select class="form-control">
 								<option>(All teams)</option>
 								@for(team <- teams) {

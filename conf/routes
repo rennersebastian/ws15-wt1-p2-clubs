@@ -14,7 +14,7 @@ GET    /user                        controllers.UserController.user()
 GET    /users/:id                   controllers.UserController.show(id: Long)
 GET    /user/:username              controllers.UserController.showByName(username)
 POST   /user                        controllers.UserController.newUser()
-DELETE /users/:id                   controllers.UserController.delete(id: Long)
+GET    /users/:id/delete            controllers.UserController.delete(id: Long)
 POST   /users/:id                   controllers.UserController.update(id: Long)
 
 # TEAMS
@@ -35,7 +35,8 @@ GET		/events						controllers.EventController.events()
 DELETE	/events						controllers.EventController.delete(id: Long)
 POST	/event						controllers.EventController.newEvent()
 GET     /events/:id                 controllers.EventController.show(id: Long)
-POST    /events/:id                 controllers.EventController.update(id: Long)
+POST    /events/:id                 controllers.EventController.updateName(id: Long)
+POST    /events/:id                 controllers.EventController.updateDate(id: Long)
 
 # LOGIN
 GET     /login                      controllers.LoginController.index()

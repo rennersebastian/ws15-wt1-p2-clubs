@@ -4,6 +4,9 @@
     <div class="row">
         <div class="col-md-12">
             <h2>Update profile</h2>
+            @if(flash.containsKey("success")) {
+                @flash.get("success")
+            }
             <form class="form-inline" action="@{val id = user.id; routes.UserController.update(id)}" method="post">
                 <div class="row">
                     <div class="form-group">
@@ -40,14 +43,31 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary top-margin">Save</button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <h2>Delete profile</h2>
     <div class="row">
-        <a href="@routes.UserController.delete(user.id)"><i class="glyphicon glyphicon-remove"></i> Delete Account</a>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-danger top-margin" data-toggle="modal" data-target="#myModal">Delete Account</button>
+        </div>
     </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Are you sure you want to delete your account?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <a href="@routes.UserController.delete(user.id)" class="delete-link"><i class="glyphicon glyphicon-remove"></i> Yes</a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 }
