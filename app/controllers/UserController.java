@@ -93,8 +93,9 @@ public class UserController {
     @Authenticated(Secured.class)
     public Result delete(Long id) {
         User user = User.find.byId(id);
+        session().clear();
         user.delete();
-        return redirect(routes.UserController.users());
+        return redirect(routes.Application.index());
     }
 
 

@@ -1,3 +1,11 @@
 .nav-right{
     float: right;
 }
+
+.delete-link{
+    color: #ff0000;
+}
+
+.top-margin{
+    margin-top: 20px;
+}
