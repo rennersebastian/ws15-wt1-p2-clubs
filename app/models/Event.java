@@ -9,28 +9,34 @@ import play.data.validation.*;
 
 @Entity
 @Table(name="or_event")
-public class Event extends Model
-{
+public class Event extends Model {
     @Id
+	@Column(name="event_id")
     public Long id;
-    public String eventname;
+	
+	@Constraints.Required
+	@Column(name = "event_name")
+    public String eventName;
+
+	@Constraints.Required
     public Date date;
 	
 	public static Finder<Long, Event> find = new Finder<Long, Event>(Event.class);
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Team team;
 	
-	@OneToMany
-	public List<Invite> invites;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "event")
+	public List<Invite> invites = new ArrayList<Invite>();
 	
-	public void setName(String eventname)
-	{
-		this.eventname = eventname;
+	public String getEventName() { return this.eventName; }
+	public Date getDate() { return this.date; }
+	
+	public void setEventName(String name) {
+		this.eventName = name;
 	}
-	
-	public void setDate(Date date)
-	{
+
+	public void setDate(Date date) {
 		this.date = date;
 	}
 }

@@ -17,43 +17,51 @@ import play.data.validation.*;
 @Table(name="or_user")
 public class User extends Model{
     @Id
+	@Column(name = "user_id")
     public Long id;
 
     @Constraints.Required
+	@Column(name = "user_name")
     public String userName;
 
     @Constraints.Required
-    private byte[] shaPassword;
+    public byte[] shaPassword;
 
+	@Constraints.Required
+	@Column(name = "first_name")
     public String firstName;
+	
+	@Constraints.Required
+	@Column(name = "last_name")
     public String lastName;
 
     public static Finder<Long, User> find = new Finder<Long,User>(User.class);
 
-    public Long getId(){
-        return id;
-    }
-
-    public void setUsername(String username) {
-        this.userName = username;
-    }
-
-    public String getUserName(){
-        return this.userName;
-    }
+    public Long getId(){ return this.id; }
+    public String getUserName() { return this.userName; }
     public String getFirstName() { return this.firstName; }
     public String getLastName() { return this.lastName; }
-
     public byte[] getShaPassword() { return this.shaPassword; }
-
-    public void setPassword(String password) {
-        this.shaPassword = getSha512(password);
+	
+	public void setUsername(String username) {
+        this.userName = username;
     }
-    public void setFirstName(String firstname) { this.firstName = firstname; }
+	
+    public void setFirstName(String firstname) { 
+		this.firstName = firstname;
+	}
+	
     public void setLastName(String lastname) {
         this.lastName = lastname;
     }
-    public void setShaPassword(byte[] shaPassword) { this.shaPassword = shaPassword; }
+	
+	public void setPassword(String password) {
+        this.shaPassword = getSha512(password);
+    }
+	
+    public void setShaPassword(byte[] shaPassword) { 
+		this.shaPassword = shaPassword;
+	}
 
     public static byte[] getSha512(String value) {
         try {
@@ -83,8 +91,8 @@ public class User extends Model{
     }
 
 	@ManyToMany(cascade=CascadeType.ALL)
-	public List<Team> teams;
+	public List<Team> teams = new ArrayList<Team>();
 
-	@OneToMany
-	public List<Invite> invites;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "member")
+	public List<Invite> invites = new ArrayList<Invite>();
 }

@@ -1,12 +1,12 @@
-@(event: Event)
+@(team: Team, event: Event)
 
-@main(event.eventname) {
+@main(event.getEventName()) {
 	<div class="row">
 		<div class="col-md-12">
-			<form class="form-inline" action="@{val id = event.id; routes.EventController.updateName(id)}" method="post">
+			<form class="form-inline" action="@routes.EventController.updateName(team.id, event.id)" method="post">
 				<div class="form-group">
 					<input text="number" name="id" value="@event.id">
-					<input placeholder="eventname" type="text" class="form-control as-label" name="name" value="@event.eventname" \><i class="glyphicon glyphicon-pencil as-label"></i>
+					<input placeholder="eventname" type="text" class="form-control as-label" name="name" value="@event.eventName" \><i class="glyphicon glyphicon-pencil as-label"></i>
 				</div>
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary">Save</button>
