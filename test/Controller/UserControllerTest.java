@@ -1,25 +1,24 @@
 package Controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.sun.media.jfxmedia.logging.Logger;
 import controllers.routes;
-import models.User;
-import org.apache.http.protocol.HTTP;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import play.api.mvc.Session;
-import play.api.test.FakeApplication;
+import play.api.Application;
+import play.api.routing.Router;
 import play.api.test.FakeRequest;
-import play.libs.Json;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.test.Helpers;
 import play.test.WithApplication;
+import play.test.WithBrowser;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static play.mvc.Http.Status.OK;
 import static play.test.Helpers.*;
 
 /**
@@ -43,5 +42,30 @@ public class UserControllerTest extends WithApplication {
     public void testIndex() {
         play.mvc.Result result = Helpers.route(routes.Application.index());
         assertEquals(200, result.status());
+    }
+
+    @Test
+    public void testSignUp() {
+        String username = "testUser";
+        String firstName = "first";
+        String lastName = "last";
+        String password = "secret";
+
+        Map<String, String> userData = new HashMap<String, String>();
+        userData.put("username", username);
+        userData.put("password", password);
+        userData.put("firstName", firstName);
+        userData.put("lastName", lastName);
+
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(POST)
+                .uri("/user")
+                .bodyForm(userData);
+
+        Result result = route(request);
+        Logger.logMsg(1, result.redirectLocation());
+        System.out.println(result.redirectLocation());
+        assertEquals(303, result.status());
+        assertEquals("/users", result.redirectLocation());
     }
 }
