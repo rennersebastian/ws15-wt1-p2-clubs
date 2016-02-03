@@ -30,6 +30,8 @@ public class TeamController {
 	public Result show(Long id) {
 		Team team = Team.find.byId(id);
 		List<User> users = User.find.all();
+		List<User> members = team.members;
+		users.removeAll(members);
 		//List<Event> events = Team.find.select("*").fetch("events");
 		return ok(views.html.teams.show.render(team, users));
 	}
@@ -39,7 +41,6 @@ public class TeamController {
 		Team team = myForm.get();
 		Team dbTeam = Team.find.byId(team.id);
 		String n = team.getName();
-		System.out.println(n);
 		dbTeam.setName(n);
 		dbTeam.update();
 		return redirect(routes.TeamController.show(id));
@@ -48,10 +49,21 @@ public class TeamController {
 	public Result addMember(Long id) {
 		Team team = Team.find.byId(id);
 		DynamicForm requestData = Form.form().bindFromRequest();
-		String result = requestData.get("userSelect");		
-		Long userId = Long.valueOf(result).longValue();
+		String result = requestData.get("userSelect");
+		Logger.info(result);
+		if(result != null && !result.isEmpty()) {
+			Long userId = Long.valueOf(result).longValue();
+			User user = User.find.byId(userId);
+			team.members.add(user);
+			team.save();
+		}
+		return redirect(routes.TeamController.show(id));
+	}
+	
+	public Result removeMember(Long id, Long userId) {
+		Team team = Team.find.byId(id);
 		User user = User.find.byId(userId);
-		team.members.add(user);
+		team.members.remove(user);
 		team.save();
 		return redirect(routes.TeamController.show(id));
 	}
