@@ -55,7 +55,7 @@
 								@for(member <- team.members) {
 									<tr>
 										<td>@member.getLastName()</td>
-										<td>@member.getFirstName()</td>
+										<td>@member.getFirstName() @member.getInvites().size</td>
 										<td><a href="@routes.TeamController.removeMember(team.id, member.id)"><i class="glyphicon glyphicon-remove"></i> Remove</a></td>
 									</tr>
 								}
@@ -110,6 +110,8 @@
 									<tr>
 										<td><a href="@routes.EventController.show(team.id, event.id)">@event.getDate()</a></td>
 										<td>@event.getEventName()</td>
+										<td>@event.getInvites().size</td>
+										<td><a href="@routes.EventController.delete(team.id, event.id)"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
 									</tr>
 								}
 								<tr>

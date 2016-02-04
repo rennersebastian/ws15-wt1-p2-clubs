@@ -56,7 +56,17 @@ public class TeamController {
 			User user = User.find.byId(userId);
 			team.members.add(user);
 			team.save();
+			
+			for (Event event : team.getEvents()) {
+				Invite invite = new Invite();
+				invite.setAccept(Invite.AcceptType.UNANSWERED);
+				invite.myevent = event;
+				invite.member = user;
+				invite.save();
+				event.save();
+			}
 		}
+		
 		return redirect(routes.TeamController.show(id));
 	}
 	

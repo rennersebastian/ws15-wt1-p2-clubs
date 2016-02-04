@@ -17,3 +17,19 @@
 label{
     padding-top: 5px;
 }
+
+.glyphicon-ok-sign {
+	color: green;
+}
+
+.glyphicon-remove-sign {
+	color: red;
+}
+
+.glyphicon-question-sign {
+	color: orange;
+}
+
+.glyphicon-info-sign {
+	color: blue;
+}

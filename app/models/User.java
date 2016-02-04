@@ -94,5 +94,7 @@ public class User extends Model{
 	public List<Team> teams = new ArrayList<Team>();
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "member")
-	public List<Invite> invites = new ArrayList<Invite>();
+	public List<Invite> invites;
+	
+	public List<Invite> getInvites() { return this.invites; }
 }

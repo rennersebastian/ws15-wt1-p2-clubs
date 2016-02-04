@@ -23,13 +23,14 @@ public class Team extends Model {
 	public static Finder<Long, Team> find = new Finder<Long,Team>(Team.class);
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "team")
-	public List<Event> events = new ArrayList<Event>();
+	public List<Event> events;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
 	public List<User> members = new ArrayList<User>();
 	
 	public String getName() { return this.name; }
 	public Date getFounded() { return this.founded; }
+	public List<Event> getEvents() { return this.events; }
 
     public void setName(String name) {
         this.name = name;

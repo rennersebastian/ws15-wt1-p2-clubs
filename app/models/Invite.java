@@ -18,8 +18,11 @@ public class Invite extends Model{
 		UNANSWERED
 	}
 	
+	public static Map<AcceptType, String> symbols = new HashMap<AcceptType, String>();
+	
 	public Invite() {
 		invited = new Date();
+		setAccept(AcceptType.UNANSWERED);
 	}
 
     @Id
@@ -35,7 +38,7 @@ public class Invite extends Model{
 	public static Finder<Long, Invite> find = new Finder<Long,Invite>(Invite.class);
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	public Event event;
+	public Event myevent;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	public User member;
@@ -50,4 +53,29 @@ public class Invite extends Model{
 	public void setInvited(Date invited) {
 		this.invited = invited;
 	}
+	
+	public static String getAcceptSymbol(Long memberId, Long eventId) {
+        Invite invite = Invite.find
+							.where()
+							.eq("myevent.id", eventId)
+							.eq("member.id", memberId)
+							.findUnique();
+		//AcceptType.values()[invite.getAccept()];
+		
+		switch(AcceptType.values()[invite.getAccept()]) {
+			case ACCEPT: {
+				return "glyphicon glyphicon-ok-sign";
+			}
+			case DECLINE: {
+				return "glyphicon glyphicon-remove-sign";
+			}
+			case UNCERTAIN: {
+				return "glyphicon glyphicon-question-sign";
+			}
+			case UNANSWERED: {
+				return "glyphicon glyphicon-info-sign";
+			}
+		}
+		return "";
+    }
 }

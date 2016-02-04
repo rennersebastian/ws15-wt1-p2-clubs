@@ -26,11 +26,12 @@ public class Event extends Model {
 	@ManyToOne(cascade = CascadeType.ALL)
 	public Team team;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "event")
-	public List<Invite> invites = new ArrayList<Invite>();
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "myevent")
+	public List<Invite> invites;
 	
 	public String getEventName() { return this.eventName; }
 	public Date getDate() { return this.date; }
+	public List<Invite> getInvites() { return this.invites; }
 	
 	public void setEventName(String name) {
 		this.eventName = name;

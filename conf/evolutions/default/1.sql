@@ -15,7 +15,7 @@ create table or_invite (
   invite_id                 bigint not null,
   accept                    integer,
   invited                   timestamp,
-  event_event_id            bigint,
+  myevent_event_id          bigint,
   member_user_id            bigint,
   constraint pk_or_invite primary key (invite_id))
 ;
@@ -58,8 +58,8 @@ create sequence or_user_seq;
 
 alter table or_event add constraint fk_or_event_team_1 foreign key (team_team_id) references or_team (team_id) on delete restrict on update restrict;
 create index ix_or_event_team_1 on or_event (team_team_id);
-alter table or_invite add constraint fk_or_invite_event_2 foreign key (event_event_id) references or_event (event_id) on delete restrict on update restrict;
-create index ix_or_invite_event_2 on or_invite (event_event_id);
+alter table or_invite add constraint fk_or_invite_myevent_2 foreign key (myevent_event_id) references or_event (event_id) on delete restrict on update restrict;
+create index ix_or_invite_myevent_2 on or_invite (myevent_event_id);
 alter table or_invite add constraint fk_or_invite_member_3 foreign key (member_user_id) references or_user (user_id) on delete restrict on update restrict;
 create index ix_or_invite_member_3 on or_invite (member_user_id);
 

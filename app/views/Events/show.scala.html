@@ -1,12 +1,13 @@
-@(team: Team, event: Event)
+@(team: Team, you: User, members: List[User], event: Event, accepts: List[Invite], declines: List[Invite], uncertainties: List[Invite], unansweredQuestions: List[Invite])
 
 @main(event.getEventName()) {
 	<div class="row">
 		<div class="col-md-12">
 			<form class="form-inline" action="@routes.EventController.updateName(team.id, event.id)" method="post">
 				<div class="form-group">
-					<input text="number" name="id" value="@event.id">
-					<input placeholder="eventname" type="text" class="form-control as-label" name="name" value="@event.eventName" \><i class="glyphicon glyphicon-pencil as-label"></i>
+					<input class="hidden" text="number" name="id" value="@event.id">
+					<input type="datetime-local" name="date" value="2013-12-31T15:35" class="hidden">
+					<input placeholder="eventname" type="text" class="form-control as-label" name="eventName" value="@event.eventName" \><i class="glyphicon glyphicon-pencil as-label"></i>
 				</div>
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary">Save</button>
@@ -16,96 +17,72 @@
 	</div>
 	
 	
-	<div class="row">
-		<div class="col-md-5">
-			<h3>Invited</h3>
-			
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group">
-						<form class="form-inline">
-							<div class="input-group">
-								<select class="form-control">
-									<option>Silie, Peter</option>
-									<option>Ahner, Mario</option>
-									<option>Zufall, Rainer</option>
-								</select>
-								<span class="input-group-btn">
-									<button class="btn btn-success">Add Member</button>
-								</span>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-12">
-					<div class="table-responsive">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>Last Name</th>
-									<th>First Name</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Himmel</td>
-									<td>Klara</td>
-									<td><i class="glyphicon glyphicon-remove"></td>
-								</tr>
-								<tr>
-									<td>Grube</td>
-									<td>Clair</td>
-									<td><i class="glyphicon glyphicon-remove"></td>
-								</tr>
-								<tr>
-									<td>Schweiß</td>
-									<td>Axel</td>
-									<td><i class="glyphicon glyphicon-remove"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-md-7">
+	<div class="row">		
+		<div class="col-md-12">
 			<h3>Participation</h3>
 						
-			<div class="row">
-				<div class="col-md-12">
-					<div class="table-responsive">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th title="Accepts"><i class="glyphicon glyphicon-ok-sign" style="color:green"></th>
-									<th title="Declines"><i class="glyphicon glyphicon-remove-sign" style="color:red"></th>
-									<th title="Uncertains"><i class="glyphicon glyphicon-question-sign" style="color:orange"></th>
-									<th title="Unanswered"><i class="glyphicon glyphicon-info-sign" style="color:blue"></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<span class="input-group-btn">
-									<button class="btn btn-default">Accept</button>
-									<button class="btn btn-default">Decline</button>
-									<button class="btn btn-default">Maybe</button>
-									</span>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th title="Accepts"><i class="glyphicon glyphicon-ok-sign"></th>
+								<th title="Declines"><i class="glyphicon glyphicon-remove-sign"></th>
+								<th title="Uncertains"><i class="glyphicon glyphicon-question-sign"></th>
+								<th title="Unanswered"><i class="glyphicon glyphicon-info-sign"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>@accepts.size</td>
+								<td>@declines.size</td>
+								<td>@uncertainties.size</td>
+								<td>@unansweredQuestions.size</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-			</div>
+		</div>
+	</div>
+	
+	<div class="row">		
+		<div class="col-md-12">
+			<h3>Voting</h3>
+						
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Last Name</th>
+								<th>First Name</th>
+								<th>Vote</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>@you.getLastName()</td>
+								<td>@you.getFirstName()</td>
+								<td>
+									<i class="@Invite.getAcceptSymbol(you.id, event.id)">
+									<a href="@routes.EventController.changeToAccept(team.id, event.id)"><button class="btn btn-success">Accept</button></a>
+									<a href="@routes.EventController.changeToDecline(team.id, event.id)"><button class="btn btn-danger">Decline</button></a>
+									<a href="@routes.EventController.changeToUncertain(team.id, event.id)"><button class="btn btn-warning">Maybe</button></a>
+								</td>
+							</tr>
+							@for(member <- members) {
+								<tr>
+									<td>@member.getLastName()</td>
+									<td>@member.getFirstName()</td>
+									<td><i class="@Invite.getAcceptSymbol(member.id, event.id)"></td>
+								</tr>
+							}
+							<tr>
+								<td>Nachname</td>
+								<td>Vorname</td>
+								<td>Accept</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 		</div>
 	</div>
 }
