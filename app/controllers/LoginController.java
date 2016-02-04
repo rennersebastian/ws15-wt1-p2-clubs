@@ -42,7 +42,7 @@ public class LoginController {
         }
     }
 
-
+    @Security.Authenticated(Secured.class)
     public Result logout() {
         session().clear();
         flash().put("success", "Logged out successfully");

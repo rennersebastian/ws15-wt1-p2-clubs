@@ -1,10 +1,14 @@
 package Controller;
 
 import com.sun.media.jfxmedia.logging.Logger;
+import controllers.UserController;
 import controllers.routes;
+import models.User;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import play.api.Application;
 import play.api.routing.Router;
 import play.api.test.FakeRequest;
@@ -14,28 +18,25 @@ import play.test.Helpers;
 import play.test.WithApplication;
 import play.test.WithBrowser;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static play.mvc.Http.Context.Implicit.session;
 import static play.test.Helpers.*;
 
-/**
- * Created by Sebastian on 01.02.2016.
- */
 public class UserControllerTest extends WithApplication {
-    private static play.test.FakeApplication fakeApplication;
+    private static UserController userController;
+    private static Http.Context context;
 
     @BeforeClass
-    public static void startFakeApplication() {
-        fakeApplication = fakeApplication();
-        start(fakeApplication);
-    }
-
-    @AfterClass
-    public static void shutdownFakeApplication() {
-        stop(fakeApplication);
+    public static void setup() {
+        userController = new UserController();
+        context = new Http.Context(fakeRequest());
+        Http.Context.current.set(context);
     }
 
     @Test
@@ -45,7 +46,13 @@ public class UserControllerTest extends WithApplication {
     }
 
     @Test
-    public void testSignUp() {
+    public void testUsersRoute() {
+        play.mvc.Result result = Helpers.route(routes.UserController.user());
+        assertEquals(200, result.status());
+    }
+
+    @Test
+    public void testNewUser() {
         String username = "testUser";
         String firstName = "first";
         String lastName = "last";
@@ -57,15 +64,14 @@ public class UserControllerTest extends WithApplication {
         userData.put("firstName", firstName);
         userData.put("lastName", lastName);
 
-        Http.RequestBuilder request = new Http.RequestBuilder()
+        Http.RequestBuilder newUserRequest = new Http.RequestBuilder()
                 .method(POST)
                 .uri("/user")
                 .bodyForm(userData);
 
-        Result result = route(request);
-        Logger.logMsg(1, result.redirectLocation());
-        System.out.println(result.redirectLocation());
-        assertEquals(303, result.status());
-        assertEquals("/users", result.redirectLocation());
+        Result newUserResult = route(newUserRequest);
+
+        assertEquals(303, newUserResult.status());
+        assertEquals("/users", newUserResult.redirectLocation());
     }
 }
