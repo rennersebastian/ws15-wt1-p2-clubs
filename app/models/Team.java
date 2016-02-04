@@ -31,6 +31,7 @@ public class Team extends Model {
 	public String getName() { return this.name; }
 	public Date getFounded() { return this.founded; }
 	public List<Event> getEvents() { return this.events; }
+	public List<User> getMembers() { return this.members; }
 
     public void setName(String name) {
         this.name = name;
