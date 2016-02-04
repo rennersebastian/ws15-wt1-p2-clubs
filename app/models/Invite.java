@@ -6,6 +6,8 @@ import javax.persistence.*;
 import com.avaje.ebean.Model;
 import play.data.format.*;
 import play.data.validation.*;
+import play.Logger;
+import static javax.persistence.CascadeType.*;
 
 @Entity
 @Table(name="or_invite")
@@ -37,10 +39,10 @@ public class Invite extends Model{
 	
 	public static Finder<Long, Invite> find = new Finder<Long,Invite>(Invite.class);
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade={PERSIST, MERGE, REFRESH})
 	public Event myevent;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	public User member;
 	
 	public Integer getAccept() { return this.accept; }
@@ -55,13 +57,15 @@ public class Invite extends Model{
 	}
 	
 	public static String getAcceptSymbol(Long memberId, Long eventId) {
-        Invite invite = Invite.find
+        Logger.info(eventId + " - " + memberId);
+		
+		Invite invite = Invite.find
 							.where()
 							.eq("myevent.id", eventId)
 							.eq("member.id", memberId)
 							.findUnique();
 		//AcceptType.values()[invite.getAccept()];
-		
+		if (invite != null) {
 		switch(AcceptType.values()[invite.getAccept()]) {
 			case ACCEPT: {
 				return "glyphicon glyphicon-ok-sign";
@@ -75,6 +79,7 @@ public class Invite extends Model{
 			case UNANSWERED: {
 				return "glyphicon glyphicon-info-sign";
 			}
+		}
 		}
 		return "";
     }

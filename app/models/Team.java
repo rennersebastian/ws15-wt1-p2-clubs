@@ -25,7 +25,7 @@ public class Team extends Model {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "team")
 	public List<Event> events;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany
 	public List<User> members = new ArrayList<User>();
 	
 	public String getName() { return this.name; }

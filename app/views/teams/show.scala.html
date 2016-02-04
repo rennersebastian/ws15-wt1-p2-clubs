@@ -1,4 +1,4 @@
-@(team: Team, users: List[User])
+@(team: Team, users: List[User], accepts: List[Invite], declines: List[Invite], uncertainties: List[Invite], unansweredQuestions: List[Invite])
 
 @main(team.getName()) {
 	<div class="row">
@@ -59,11 +59,6 @@
 										<td><a href="@routes.TeamController.removeMember(team.id, member.id)"><i class="glyphicon glyphicon-remove"></i> Remove</a></td>
 									</tr>
 								}
-								<tr>
-									<td>Himmel</td>
-									<td>Klara</td>
-									<td><i class="glyphicon glyphicon-remove"></td>
-								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -110,37 +105,13 @@
 									<tr>
 										<td><a href="@routes.EventController.show(team.id, event.id)">@event.getDate()</a></td>
 										<td>@event.getEventName()</td>
-										<td>@event.getInvites().size</td>
+										<td>@accepts.size</td>
+										<td>@declines.size</td>
+										<td>@uncertainties.size</td>
+										<td>@unansweredQuestions.size</td>
 										<td><a href="@routes.EventController.delete(team.id, event.id)"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
 									</tr>
 								}
-								<tr>
-									<td>15.12.2015 19:00 Uhr</td>
-									<td>Training</td>
-									<td>14</td>
-									<td>4</td>
-									<td>2</td>
-									<td>2</td>
-									<td><i class="glyphicon glyphicon-remove"></td>
-								</tr>
-								<tr>
-									<td>17.12.2015 19:00 Uhr</td>
-									<td>Training</td>
-									<td>2</td>
-									<td>1</td>
-									<td>5</td>
-									<td>12</td>
-									<td><i class="glyphicon glyphicon-remove"></td>
-								</tr>
-								<tr>
-									<td>19.12.2015 13:00 Uhr</td>
-									<td>Spiel</td>
-									<td>16</td>
-									<td>3</td>
-									<td>0</td>
-									<td>1</td>
-									<td><i class="glyphicon glyphicon-remove"></td>
-								</tr>
 							</tbody>
 						</table>
 					</div>

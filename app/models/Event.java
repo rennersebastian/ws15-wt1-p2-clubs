@@ -23,7 +23,7 @@ public class Event extends Model {
 	
 	public static Finder<Long, Event> find = new Finder<Long, Event>(Event.class);
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	public Team team;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "myevent")

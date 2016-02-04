@@ -33,7 +33,25 @@ public class TeamController {
 		List<User> members = team.members;
 		users.removeAll(members);
 		//List<Event> events = Team.find.select("*").fetch("events");
-		return ok(views.html.teams.show.render(team, users));
+		
+		List<Invite> accepts = new ArrayList<Invite>();
+		List<Invite> declines = new ArrayList<Invite>();
+		List<Invite> uncertainties = new ArrayList<Invite>();
+		List<Invite> unansweredQuestions = new ArrayList<Invite>();
+		Logger.info("" + team.getEvents().size());
+		for (Event event : team.getEvents()) {
+			Logger.info("EventId: " + event.id);
+			event = Event.find.fetch("invites").where().eq("id", event.id).findUnique();
+			Logger.info("Event-Invites: " + event.getInvites().size());
+			Logger.info("" + event.getInvites().toString());
+			/*accepts = event.getInvites().stream().filter(e -> e.getAccept() == Invite.AcceptType.ACCEPT.ordinal()).collect(Collectors.toList());
+			declines = event.getInvites().stream().filter(e -> e.getAccept() == Invite.AcceptType.DECLINE.ordinal()).collect(Collectors.toList());
+			uncertainties = event.getInvites().stream().filter(e -> e.getAccept() == Invite.AcceptType.UNCERTAIN.ordinal()).collect(Collectors.toList());
+			unansweredQuestions = event.getInvites().stream().filter(e -> e.getAccept() == Invite.AcceptType.UNANSWERED.ordinal()).collect(Collectors.toList());*/
+		}
+		
+		
+		return ok(views.html.teams.show.render(team, users, accepts, declines, uncertainties, unansweredQuestions));
 	}
 	
 	public Result update(Long id) {
@@ -93,7 +111,9 @@ public class TeamController {
 	
 	public Result delete(Long id) {
 		Team team = Team.find.byId(id);
-		
+		team.getEvents().clear();
+		team.getMembers().clear();
+		team.save();
 		team.delete();
 		
 		//Team.find.ref(id).delete();

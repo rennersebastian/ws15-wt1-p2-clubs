@@ -32,6 +32,8 @@ public class EventController {
 			invite.member = member;
 			invite.myevent = event;
 			invite.save();
+				//event.getInvites().add(invite);
+				
 			Logger.info(invite.toString());
 		}
 		
@@ -77,9 +79,6 @@ public class EventController {
 		members.remove(user);
 		
 		Event event = Event.find.byId(eventId);	
-		Stream<Invite> s = event.getInvites().stream();
-		List<Invite> li = (List<Invite>) s.collect(Collectors.toList());
-		Logger.info("" + event.getInvites().size() + " _ " + s.toString() + " - " + li.toString());
 		List<Invite> accepts = event.getInvites().stream().filter(e -> e.getAccept() == Invite.AcceptType.ACCEPT.ordinal()).collect(Collectors.toList());
 		List<Invite> declines = event.getInvites().stream().filter(e -> e.getAccept() == Invite.AcceptType.DECLINE.ordinal()).collect(Collectors.toList());
 		List<Invite> uncertainties = event.getInvites().stream().filter(e -> e.getAccept() == Invite.AcceptType.UNCERTAIN.ordinal()).collect(Collectors.toList());
@@ -116,11 +115,16 @@ public class EventController {
 	}
 	
 	public Result delete(Long id, Long eventId){
-		Event.find.ref(eventId).delete();
+		//Event.find.ref(eventId).delete();
+		Event event = Event.find.byId(eventId);
+		/*event.team = null;
+		event.invites.clear();
+		event.save();*/
+		event.delete();
 		//Team team = Team.find.byId(id);
 		//team.events.remove(event);
 		//team.save();
 		//event.delete();
-		return redirect(routes.EventController.events(id));
+		return redirect(routes.TeamController.show(id));
 	}
 }

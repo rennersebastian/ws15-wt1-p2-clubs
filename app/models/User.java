@@ -90,7 +90,7 @@ public class User extends Model{
                 .findUnique();
     }
 
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany//(cascade=CascadeType.ALL)
 	public List<Team> teams = new ArrayList<Team>();
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "member")
